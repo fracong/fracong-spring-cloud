@@ -13,10 +13,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-		</dependency>
-		<dependency>
 	        <groupId>${project.parent.groupId}</groupId>
 	        <artifactId>fracong-core</artifactId>
 	        <version>${project.parent.version}</version>

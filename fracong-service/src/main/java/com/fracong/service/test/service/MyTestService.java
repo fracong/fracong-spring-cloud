@@ -1,28 +1,18 @@
-package com.fracong.manage.test.service;
+package com.fracong.service.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
 
 @Service
-public class TestService {
+public class MyTestService {
 	@Autowired
 	private TestMapper testMapper;
-	@Autowired
-	private RestTemplate restTemplate;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
 		return test;
 	}
-	
-	public Test testRestTemplate(String id){
-		Test test = restTemplate.getForObject("http://localhost:8889/fracong-service/mytest/test/"+id, Test.class);
-		return test;
-	}
-	
-	
 }

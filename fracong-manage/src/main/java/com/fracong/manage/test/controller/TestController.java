@@ -21,4 +21,11 @@ public class TestController {
 		Test test = testService.test(id);
 		return JSON.toJSONString(test);
 	}
+	
+	
+	@GetMapping("/testR/{id}")
+	public String testRestTemplate(@PathVariable(name="id") String id){
+		Test test = testService.testRestTemplate(id);
+		return JSON.toJSONString(test);
+	}
 }
