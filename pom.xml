@@ -92,5 +92,7 @@
   	<module>fracong-html</module>
   	<module>fracong-eureka-server</module>
   	<module>fracong-util</module>
+  	<module>fracong-service</module>
+  	<module>fracong-manage</module>
   </modules>
 </project>
