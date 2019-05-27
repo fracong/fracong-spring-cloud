@@ -60,5 +60,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+		<dependency>
+	        <groupId>${project.parent.groupId}</groupId>
+	        <artifactId>fracong-core</artifactId>
+	        <version>${project.parent.version}</version>
+			<type>jar</type>
+	    </dependency>
 	</dependencies>
 </project>
