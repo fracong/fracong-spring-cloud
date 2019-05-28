@@ -22,4 +22,11 @@ public class MyTestContoller {
 		System.err.println(JSON.toJSONString(test));
 		return JSON.toJSONString(test);
 	}
+	
+	@GetMapping("/testFeign")
+	public String testFeign(){
+		Test test = myTestService.test("1");
+		System.err.println(JSON.toJSONString(test));
+		return JSON.toJSONString(test);
+	}
 }
