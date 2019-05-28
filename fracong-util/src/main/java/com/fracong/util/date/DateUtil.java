@@ -1,5 +1,6 @@
 package com.fracong.util.date;
 
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,38 +15,43 @@ public class DateUtil {
 		TYPE_ss;
 	}
 	
-	public static Date getNowDate(DateType dateType) {
+	/**
+	 * 获取当前时间
+	 * @param dateType
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static Date getNowDate(DateType dateType) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat(dateType.getDateTypeString());
 		String dateString = formatter.format(new Date());
-		Date currentTime = formatter.parse(dateString, new ParsePosition(8));
+		Date currentTime = formatter.parse(dateString);
 		return currentTime;
 	}
 	
-	public static Date stringConverDate(String dateString, DateType dateType) {
+	/**
+	 * string转date
+	 * @param dateString
+	 * @param dateType
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static Date stringConverDate(String dateString, DateType dateType) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat(dateType.getDateTypeString());
-		Date currentTime = formatter.parse(dateString, new ParsePosition(8));
-		return currentTime;
+		return formatter.parse(dateString);
 	}
 	
+	/**
+	 * date转string
+	 * @param date
+	 * @param dateType
+	 * @return
+	 */
 	public static String dateConverString(Date date, DateType dateType) {
 		SimpleDateFormat formatter = new SimpleDateFormat(dateType.getDateTypeString());
 		String dateString = formatter.format(date);
 		return dateString;
 	}
 	
-	/**
-	 * 提取一个月中的最后一天
-	 *
-	 * @param day
-	 * @return
-	 */
-	public static Date getLastDate(long day) {
-		Date date = new Date();
-		long date_3_hm = date.getTime() - 3600000 * 34 * day;
-		Date date_3_hm_date = new Date(date_3_hm);
-		return date_3_hm_date;
-	}
-
 	/**
 	 * 输入一个整数类型的字符串, 然后转换成时分秒的形式输出 例如：输入568 返回结果为：00:09:28
 	 * 输入null或者“” 返回结果为:00:00:00
@@ -65,9 +71,9 @@ public class DateUtil {
 		return (hour.length() > 1 ? hour : "0" + hour) + ":" + (minute.length() > 1 ? minute : "0" + minute) + ":"
 				+ (second.length() > 1 ? second : "0" + second);
 	}
-
+	
 	/**
-	 * 得到现在小时 2018-02-02 02:02:02
+	 * 得到现在小时、分、秒 2018-02-02 02:02:02
 	 */
 	public static String getNowTimeByType(TimeType type) {
 		SimpleDateFormat formatter = new SimpleDateFormat(DateType.TYPE_1.getDateTypeString());
@@ -80,27 +86,6 @@ public class DateUtil {
 		return null;
 	}
 	
-
-	/**
-	 * 二个小时时间间的差值,必须保证二个时间都是"HH:MM"的格式，返回字符型的分钟
-	 */
-	public static String getTwoHour(String st1, String st2) {
-		String[] kk = null;
-		String[] jj = null;
-		kk = st1.split(":");
-		jj = st2.split(":");
-		if (Integer.parseInt(kk[0]) < Integer.parseInt(jj[0]))
-			return "0";
-		else {
-			double y = Double.parseDouble(kk[0]) + Double.parseDouble(kk[1]) / 60;
-			double u = Double.parseDouble(jj[0]) + Double.parseDouble(jj[1]) / 60;
-			if ((y - u) > 0)
-				return y - u + "";
-			else
-				return "0";
-		}
-	}
-
 	/**
 	 * 得到二个日期间的间隔天数
 	 */
@@ -116,64 +101,82 @@ public class DateUtil {
 		}
 		return day + "";
 	}
-
+	
 	/**
-	 * 时间前推或后推分钟,其中JJ表示分钟.
+	 * 时间推几天
 	 */
-	public static String getPreTime(String sj1, String jj) {
-		SimpleDateFormat format = new SimpleDateFormat(DateType.TYPE_1.getDateTypeString());
-		String mydate1 = "";
-		try {
-			Date date1 = format.parse(sj1);
-			long Time = (date1.getTime() / 1000) + Integer.parseInt(jj) * 60;
-			date1.setTime(Time * 1000);
-			mydate1 = format.format(date1);
-		} catch (Exception e) {
-		}
-		return mydate1;
-	}
-
-	/**
-	 * 得到一个时间延后或前移几天的时间,nowdate(yyyy-mm-dd)为时间,delay为前移或后延的天数
-	 */
-	public static String getNextDay(String nowdate, String delay) {
-		SimpleDateFormat format = new SimpleDateFormat(DateType.TYPE_3.getDateTypeString());
+	public static String getNextDay(String nowdate, String delay, DateType dateType) {
+		SimpleDateFormat format = new SimpleDateFormat(dateType.getDateTypeString());
 		try {
 			String mdate = "";
-			Date d = stringConverDate(nowdate, DateType.TYPE_3);
+			Date d = stringConverDate(nowdate, dateType);
 			long myTime = (d.getTime() / 1000) + Integer.parseInt(delay) * 24 * 60 * 60;
 			d.setTime(myTime * 1000);
 			mdate = format.format(d);
 			return mdate;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "";
 		}
 	}
+	
+	/**
+	 * 将时间推几分钟
+	 * @param 当前时间
+	 * @return
+	 * @throws Exception
+	 */
+	public static Date getNextMinute(Date date, Integer minuteNum) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat(DateType.TYPE_9.getDateTypeString());
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+minuteNum);
+        Date beginDate = calendar.getTime();
+        beginDate = sdf.parse(sdf.format(beginDate));
+		return beginDate;
+	}
+	
+	/**
+	 * 将时间推几小时
+	 * @param 当前时间
+	 * @return
+	 * @throws Exception
+	 */
+	public static Date getNextHour(Date date, Integer hourNum) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat(DateType.TYPE_9.getDateTypeString());
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY)+hourNum);
+        Date beginDate = calendar.getTime();
+        beginDate = sdf.parse(sdf.format(beginDate));
+		return beginDate;
+	}
 
 	/**
-	 * 功能：
-	 * 距离现在几天的时间是多少 获得一个时间字符串，格式为：yyyy-MM-dd HH:mm:ss day 如果为整数，表示未来时间
-	 * 如果为负数，表示过去时间
-	 *
+	 * 当前时间推几天
+	 * @param day
+	 * @param type
+	 * @return
 	 */
-	public static String getFromNow(int day) {
-		SimpleDateFormat format = new SimpleDateFormat(DateType.TYPE_1.getDateTypeString());
+	public static String getFromNow(int day, DateType type) {
+		SimpleDateFormat format = new SimpleDateFormat(type.getDateTypeString());
 		Date date = new Date();
 		long dateTime = (date.getTime() / 1000) + day * 24 * 60 * 60;
 		date.setTime(dateTime * 1000);
 		return format.format(date);
 	}
-
+	
 	/**
 	 * 判断是否润年
 	 *
 	 * @param ddate
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static boolean isLeapYear(String dateString) {
-
+	public static boolean isLeapYear(String dateString) throws ParseException {
 		/**
-		 * 详细设计： 1.被400整除是闰年，否则： 2.不能被4整除则不是闰年 3.能被4整除同时不能被100整除则是闰年
+		 * 详细设计： 
+		 * 1.被400整除是闰年，否则： 2.不能被4整除则不是闰年 3.能被4整除同时不能被100整除则是闰年
 		 * 3.能被4整除同时能被100整除则不是闰年
 		 */
 		Date d = stringConverDate(dateString, DateType.TYPE_3);
@@ -211,8 +214,9 @@ public class DateUtil {
 	 *
 	 * @param dat
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static String getEndDateOfMonth(String dat) {// yyyy-MM-dd
+	public static String getEndDateOfMonth(String dat) throws ParseException {// yyyy-MM-dd
 		String str = dat.substring(0, 8);
 		String month = dat.substring(5, 7);
 		int mon = Integer.parseInt(month);
@@ -277,8 +281,9 @@ public class DateUtil {
 	 * @param dateString
 	 * @param num
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static String getWeek(String dateString, String num) {
+	public static String getWeek(String dateString, String num) throws ParseException {
 		// 再转换为时间
 		Date dd = DateUtil.stringConverDate(dateString, DateType.TYPE_3);
 		Calendar c = Calendar.getInstance();
@@ -305,8 +310,9 @@ public class DateUtil {
 	 *
 	 * @param sdate
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static String getWeek(String dateString) {
+	public static String getWeek(String dateString) throws ParseException {
 		// 再转换为时间
 		Date date = DateUtil.stringConverDate(dateString, DateType.TYPE_3);
 		Calendar c = Calendar.getInstance();
@@ -314,7 +320,7 @@ public class DateUtil {
 		return new SimpleDateFormat("EEEE").format(c.getTime());
 	}
 
-	public static String getWeekStr(String dateString) {
+	public static String getWeekStr(String dateString) throws ParseException {
 		String str = "";
 		str = DateUtil.getWeek(dateString);
 		if ("1".equals(str)) {
@@ -366,8 +372,9 @@ public class DateUtil {
 	 *
 	 * @param sdate
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static String getNowMonth(String sdate) {
+	public static String getNowMonth(String sdate) throws ParseException {
 		// 取该时间所在月的一号
 		sdate = sdate.substring(0, 8) + "01";
 
@@ -376,7 +383,7 @@ public class DateUtil {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int u = c.get(Calendar.DAY_OF_WEEK);
-		String newday = DateUtil.getNextDay(sdate, (1 - u) + "");
+		String newday = DateUtil.getNextDay(sdate, (1 - u) + "", DateType.TYPE_3);
 		return newday;
 	}
 
@@ -528,37 +535,5 @@ public class DateUtil {
 		// 结果为“0”是上午 结果为“1”是下午
 		int i = ca.get(GregorianCalendar.AM_PM);
 		return i == 0 ? "AM" : "PM";
-	}
-	
-	/**
-	 * 将时间推几分钟
-	 * @param 当前时间
-	 * @return
-	 * @throws Exception
-	 */
-	public static Date handleBeginDateMinute(Date date,Integer minuteNum) throws Exception{
-		SimpleDateFormat sdf = new SimpleDateFormat(DateType.TYPE_9.getDateTypeString());
-		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+minuteNum);
-        Date beginDate = calendar.getTime();
-        beginDate = sdf.parse(sdf.format(beginDate));
-		return beginDate;
-	}
-	
-	/**
-	 * 将时间推几小时
-	 * @param 当前时间
-	 * @return
-	 * @throws Exception
-	 */
-	public static Date handleBeginDateHour(Date date,Integer hourNum) throws Exception{
-		SimpleDateFormat sdf = new SimpleDateFormat(DateType.TYPE_9.getDateTypeString());
-		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY)+hourNum);
-        Date beginDate = calendar.getTime();
-        beginDate = sdf.parse(sdf.format(beginDate));
-		return beginDate;
 	}
 }
