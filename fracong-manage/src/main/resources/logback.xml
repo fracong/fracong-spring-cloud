@@ -25,7 +25,7 @@
 	<logger name="java.sql.Connection" level="DEBUG" />
 	<logger name="java.sql.Statement" level="DEBUG" />
 	<logger name="java.sql.PreparedStatement" level="DEBUG" />
-	<logger name="com.ctvit" level="TRACE"></logger>
+	<logger name="com.fracong" level="TRACE"></logger>
 	<logger name="com.log" level="TRACE"></logger>
 
     <root level="info"> <!-- root将级别为“INFO”及大于“INFO”的日志信息交给已经配置好的名为“Console”的appender处理，“Console”appender将信息打印到Console； -->
