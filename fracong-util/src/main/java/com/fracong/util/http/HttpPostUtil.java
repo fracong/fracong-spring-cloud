@@ -1,4 +1,4 @@
-package com.fracong.util.date;
+package com.fracong.util.http;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
