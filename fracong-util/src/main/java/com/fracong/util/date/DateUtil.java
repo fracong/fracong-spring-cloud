@@ -21,11 +21,23 @@ public class DateUtil {
 	 * @return
 	 * @throws ParseException 
 	 */
-	public static Date getNowDate(DateType dateType) throws ParseException {
+	public static Date getNowDateByType(DateType dateType) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat(dateType.getDateTypeString());
 		String dateString = formatter.format(new Date());
 		Date currentTime = formatter.parse(dateString);
 		return currentTime;
+	}
+	
+	/**
+	 * 获取当前时间String
+	 * @param dateType
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static String getNowDateStringByType(DateType dateType) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat(dateType.getDateTypeString());
+		String dateString = formatter.format(new Date());
+		return dateString;
 	}
 	
 	/**
