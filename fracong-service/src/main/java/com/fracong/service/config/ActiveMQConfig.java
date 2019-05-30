@@ -15,7 +15,7 @@ public class ActiveMQConfig {
 
 	@Bean
     public Queue queue() {
-       return new ActiveMQQueue(ConstantUtil.QUEUE_NAME_TEST);
+       return new ActiveMQQueue(ConstantUtil.ACTIVE_QUEUE_NAME_TEST);
     }
 	
 	@Bean

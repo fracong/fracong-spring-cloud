@@ -2,6 +2,7 @@ package com.fracong.service.test.service;
 
 import javax.jms.Queue;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jms.core.JmsMessagingTemplate;
@@ -29,6 +30,9 @@ public class MyTestService {
 	
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -59,6 +63,16 @@ public class MyTestService {
 		message.setSubject("测试邮件");//邮件主题
 		message.setText("这是邮件ID---->"+id);//邮件内容
 		mailSender.send(message);//发送邮件
+		return "ok";
+	}
+	
+	/**
+	 * 测试RabbitMQ 生产者
+	 * @param id
+	 * @return
+	 */
+	public String testRabbitMQ(String id) {
+		rabbitTemplate.convertAndSend(ConstantUtil.RABBIT_QUEUE_NAME_TEST, "hello, fracong's rabbit! id is "+id);
 		return "ok";
 	}
 }

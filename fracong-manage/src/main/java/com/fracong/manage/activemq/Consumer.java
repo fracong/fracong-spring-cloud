@@ -12,7 +12,7 @@ public class Consumer {
 	 * 消费者
 	 * @param text
 	 */
-	@JmsListener(destination = ConstantUtil.QUEUE_NAME_TEST)
+	@JmsListener(destination = ConstantUtil.ACTIVE_QUEUE_NAME_TEST)
     public void receiveQueue(String text) {
        System.out.println(text);
     }
