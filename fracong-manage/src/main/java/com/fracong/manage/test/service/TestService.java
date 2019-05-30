@@ -1,12 +1,14 @@
 package com.fracong.manage.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fracong.manage.test.controller.MyTestController;
 import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
+import com.fracong.util.constant.ConstantUtil;
 
 @Service
 public class TestService {
@@ -29,6 +31,13 @@ public class TestService {
 	
 	public String testFeign(String id){
 		String test = myTestController.testFeign();
+		return test;
+	}
+	
+	@Cacheable(value=ConstantUtil.FRACONG_EH_CACHE_NAME,key="#id")
+	public Test testEhCacheQ(String id){
+		System.err.println(id);
+		Test test = testMapper.selectByPrimaryKey(id);
 		return test;
 	}
 }

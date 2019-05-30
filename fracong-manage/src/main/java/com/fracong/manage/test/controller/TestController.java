@@ -48,4 +48,15 @@ public class TestController {
 		String testFeign = testService.testFeign(id);
 		return testFeign;
 	}
+	
+	/**
+	 * 调用ehcache
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/testEhCacheQ/{id}")
+	public String testEhCacheQ(@PathVariable(name="id") String id){
+		Test test = testService.testEhCacheQ(id);
+		return JSON.toJSONString(test);
+	}
 }
