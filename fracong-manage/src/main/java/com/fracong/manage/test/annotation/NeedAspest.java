@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)//注解加载方法上
+@Target(ElementType.METHOD)//注解加载方法上 PARAMETER 添加在参数上，FIELD添加在字段上
 public @interface NeedAspest {
 	boolean ifNeed() default true; 
 }
