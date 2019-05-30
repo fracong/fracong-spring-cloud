@@ -29,4 +29,16 @@ public class MyTestContoller {
 		System.err.println(JSON.toJSONString(test));
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 测试activeMQ
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/testActiveMQ/{id}")
+	public String testActiveMQ(@PathVariable(name="id") String id){
+		String test = myTestService.testActvieMq(id);
+		System.err.println(JSON.toJSONString(test));
+		return JSON.toJSONString(test);
+	}
 }
