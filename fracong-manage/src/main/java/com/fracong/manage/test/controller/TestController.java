@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.fracong.manage.test.annotation.MessageAnnotation;
+import com.fracong.manage.test.annotation.NeedAspest;
+import com.fracong.manage.test.annotation.NeedAspestOnMethod;
 import com.fracong.manage.test.service.TestService;
 import com.fracong.test.entity.Test;
 
@@ -21,6 +24,9 @@ public class TestController {
 	 * @param id
 	 * @return
 	 */
+	@NeedAspestOnMethod
+	@NeedAspest
+	@MessageAnnotation(getMessage="普通测试mybatis")
 	@GetMapping("/mytest/{id}")
 	public String test(@PathVariable(name="id") String id){
 		Test test = testService.test(id);
@@ -54,6 +60,7 @@ public class TestController {
 	 * @param id
 	 * @return
 	 */
+	@NeedAspestOnMethod
 	@GetMapping("/testEhCacheQ/{id}")
 	public String testEhCacheQ(@PathVariable(name="id") String id){
 		Test test = testService.testEhCacheQ(id);
