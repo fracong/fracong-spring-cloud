@@ -8,12 +8,14 @@ import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.fracong.util.constant.ConstantUtil;
+
 @Configuration
 public class ActiveMQConfig {
 
 	@Bean
     public Queue queue() {
-       return new ActiveMQQueue("sample.queue");
+       return new ActiveMQQueue(ConstantUtil.QUEUE_NAME_TEST);
     }
 	
 	@Bean
