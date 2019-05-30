@@ -41,4 +41,15 @@ public class MyTestContoller {
 		System.err.println(JSON.toJSONString(test));
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 测试activeMQ
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/sendMail/{id}")
+	public String sendMail(@PathVariable(name="id") String id){
+		String test = myTestService.sendMail(id);
+		return JSON.toJSONString(test);
+	}
 }
