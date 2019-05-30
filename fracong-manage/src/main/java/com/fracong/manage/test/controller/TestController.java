@@ -66,4 +66,16 @@ public class TestController {
 		Test test = testService.testEhCacheQ(id);
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 调用ehcache
+	 * @param id
+	 * @return
+	 */
+	@NeedAspestOnMethod
+	@GetMapping("/testKafka/{id}")
+	public String testKafka(@PathVariable(name="id") String id){
+		String test = testService.testKafka(id);
+		return JSON.toJSONString(test);
+	}
 }

@@ -2,6 +2,7 @@ package com.fracong.manage.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +19,9 @@ public class TestService {
 	private RestTemplate restTemplate;
 	@Autowired
 	private MyTestController myTestController;
+	
+	@Autowired
+    private KafkaTemplate<String, String> template;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -39,5 +43,10 @@ public class TestService {
 		System.err.println(id);
 		Test test = testMapper.selectByPrimaryKey(id);
 		return test;
+	}
+
+	public String testKafka(String id) {
+		template.send(ConstantUtil.FRACONG_KAFKA_TOPIC, id);
+		return "ok";
 	}
 }
