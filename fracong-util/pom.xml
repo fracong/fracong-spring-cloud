@@ -36,5 +36,10 @@
 		    <groupId>org.springframework.kafka</groupId>
 		    <artifactId>spring-kafka</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.101tec</groupId>
+		    <artifactId>zkclient</artifactId>
+		    <version>0.11</version>
+		</dependency>
 	</dependencies>
 </project>

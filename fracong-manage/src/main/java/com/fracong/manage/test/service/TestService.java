@@ -1,5 +1,8 @@
 package com.fracong.manage.test.service;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -10,6 +13,7 @@ import com.fracong.manage.test.controller.MyTestController;
 import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
 import com.fracong.util.constant.ConstantUtil;
+import com.fracong.util.zk.ZkConfig;
 
 @Service
 public class TestService {
@@ -49,4 +53,30 @@ public class TestService {
 		template.send(ConstantUtil.FRACONG_KAFKA_TOPIC, id);
 		return "ok";
 	}
+	
+	/**
+	 * 查询单个配置的值
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public String testConfig(String param) throws Exception{
+		Map<String, String> allParams = ZkConfig.getAllParams();
+		Set<String> keySet = allParams.keySet();
+		for (String string : keySet) {
+			System.err.println(string+"->"+allParams.get(string));
+		}
+		String singleParams = ZkConfig.getSingleParams(param);
+		return singleParams;
+	}
+	
+	/**
+	 * 将本地配置写入zk
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateConfig() throws Exception{
+		 ZkConfig.readConfigDataToZk();
+		 return "ok";
+	 }
 }

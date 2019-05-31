@@ -78,4 +78,28 @@ public class TestController {
 		String test = testService.testKafka(id);
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 查询单个配置的值
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/testConfig/{id}")
+	public String testConfig(@PathVariable(name="id") String id) throws Exception{
+		String test = testService.testConfig(id);
+		return JSON.toJSONString(test);
+	}
+	
+	/**
+	 * 将本地配置写入zk
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/updateConfig")
+	public String updateConfig() throws Exception{
+		String test = testService.updateConfig();
+		return JSON.toJSONString(test);
+	}
 }
