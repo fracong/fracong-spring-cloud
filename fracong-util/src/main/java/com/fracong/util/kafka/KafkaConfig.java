@@ -10,6 +10,7 @@ import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -22,6 +23,7 @@ import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
 @EnableKafka
+@ConditionalOnProperty(name="fracong.kafka.ip")
 public class KafkaConfig {
 	@Value("${fracong.kafka.ip}")
 	private String ip;
