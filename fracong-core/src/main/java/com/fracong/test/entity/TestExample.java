@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestExample extends Test{
-    protected String orderByClause;
+	private static final long serialVersionUID = 4494443209305322438L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 
