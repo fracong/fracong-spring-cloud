@@ -1,7 +1,11 @@
 package com.fracong.test.entity;
 
-public class Test {
-    private String id;
+import java.io.Serializable;
+
+public class Test implements Serializable{
+	private static final long serialVersionUID = -6174452579341655671L;
+
+	private String id;
 
     private String name;
 

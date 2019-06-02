@@ -9,6 +9,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.Cached;
+import com.alicp.jetcache.anno.CreateCache;
 import com.fracong.manage.test.controller.MyTestController;
 import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
@@ -26,6 +29,8 @@ public class TestService {
 	
 	@Autowired
     private KafkaTemplate<String, String> template;
+	@CreateCache
+	private Cache<String,Test> jetcache;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -78,5 +83,38 @@ public class TestService {
 	public String updateConfig() throws Exception{
 		 ZkConfig.readConfigDataToZk();
 		 return "ok";
+	 }
+	
+	/**
+	 * 测试jetcache 存入
+	 * @return
+	 * @throws Exception
+	 */
+	public Test testPutJetcache(String id) throws Exception{
+		Test test = testMapper.selectByPrimaryKey(id);
+		jetcache.put(id, test);
+		Test test1 = jetcache.get(id);
+		return test1;
+	 }
+	
+	/**
+	 * 测试jetcache 取出缓存
+	 * @return
+	 * @throws Exception
+	 */
+	public Test testGetJetcache(String id) throws Exception{
+		Test test = jetcache.get(id);
+		return test;
+	 }
+	
+	/**
+	 * 测试jetcache 取出缓存
+	 * @return
+	 * @throws Exception
+	 */
+	@Cached
+	public Test testGetJetcacheMethod(String id) throws Exception{
+		Test test = testMapper.selectByPrimaryKey(id);
+		return test;
 	 }
 }

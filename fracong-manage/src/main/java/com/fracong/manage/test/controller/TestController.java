@@ -102,4 +102,40 @@ public class TestController {
 		String test = testService.updateConfig();
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 测试PUT的jetcache
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/testPutJet/{id}")
+	public String testPutJet(@PathVariable(name="id") String id) throws Exception{
+		Test test = testService.testPutJetcache(id);
+		return JSON.toJSONString(test);
+	}
+	
+	/**
+	 * 测试GET的jetcache
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/testGetJet/{id}")
+	public String testGetJet(@PathVariable(name="id") String id) throws Exception{
+		Test test = testService.testGetJetcache(id);
+		return JSON.toJSONString(test);
+	}
+	
+	/**
+	 * 测试jetcache的方法缓存
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/testGetJetMethod/{id}")
+	public String testGetJetMethod(@PathVariable(name="id") String id) throws Exception{
+		Test test = testService.testGetJetcacheMethod(id);
+		return JSON.toJSONString(test);
+	}
 }
