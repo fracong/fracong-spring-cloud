@@ -74,7 +74,7 @@ public class KafkaConfig {
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-        System.out.println("init");
+        System.out.println("init kafka");
         return new KafkaTemplate<String, String>(producerFactory());
     }
 }

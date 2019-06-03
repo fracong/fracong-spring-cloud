@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
+import com.fracong.util.cache.redis.RedisCacheType;
+import com.fracong.util.cache.redis.RedisUtil;
 import com.fracong.util.constant.ConstantUtil;
 
 @Service
@@ -33,6 +35,9 @@ public class MyTestService {
 	
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+
+	@Autowired
+	private RedisUtil redisUtil;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -74,5 +79,25 @@ public class MyTestService {
 	public String testRabbitMQ(String id) {
 		rabbitTemplate.convertAndSend(ConstantUtil.RABBIT_QUEUE_NAME_TEST, "hello, fracong's rabbit! id is "+id);
 		return "ok";
+	}
+	
+	/**
+	 * 测试Redis put
+	 * @param id
+	 * @return
+	 */
+	public String testRedisPut(String id) {
+		redisUtil.set(RedisCacheType.TEST.toString(), id, 0);
+		return "ok";
+	}
+	
+	/**
+	 * 测试Redis get
+	 * @param id
+	 * @return
+	 */
+	public String testRedisGet(String id) {
+		String string = redisUtil.get(RedisCacheType.TEST.toString(), 0);
+		return string;
 	}
 }

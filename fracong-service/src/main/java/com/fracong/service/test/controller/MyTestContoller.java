@@ -23,6 +23,10 @@ public class MyTestContoller {
 		return JSON.toJSONString(test);
 	}
 	
+	/**
+	 * 测试FeignClien的使用
+	 * @return
+	 */
 	@GetMapping("/testFeign")
 	public String testFeign(){
 		Test test = myTestService.test("1");
@@ -43,7 +47,7 @@ public class MyTestContoller {
 	}
 	
 	/**
-	 * 测试activeMQ
+	 * 测试RabbitMQ
 	 * @param id
 	 * @return
 	 */
@@ -55,13 +59,35 @@ public class MyTestContoller {
 	}
 	
 	/**
-	 * 测试activeMQ
+	 * 测试邮件的发送
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("/sendMail/{id}")
 	public String sendMail(@PathVariable(name="id") String id){
 		String test = myTestService.sendMail(id);
+		return JSON.toJSONString(test);
+	}
+	
+	/**
+	 * 测试redis-put
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/testRedis/{id}")
+	public String testRedisPut(@PathVariable(name="id") String id){
+		String test = myTestService.testRedisPut(id);
+		return JSON.toJSONString(test);
+	}
+	
+	/**
+	 * 测试redis get
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/testRedisGet/{id}")
+	public String testRedisGet(@PathVariable(name="id") String id){
+		String test = myTestService.testRedisGet(id);
 		return JSON.toJSONString(test);
 	}
 }
