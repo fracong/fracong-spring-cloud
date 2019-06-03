@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.fracong.util.cache.redis.RedisUtil;
+
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -44,6 +46,11 @@ public class RedisConfig{
         JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout, StringUtils.isNotBlank(password)?password:null);
         System.out.println("init JedisPool");
         return jedisPool;
+    }
+    
+    @Bean
+    public RedisUtil redisUtil() throws Exception{
+    	return new RedisUtil(redisPoolFactory());
     }
 }
 

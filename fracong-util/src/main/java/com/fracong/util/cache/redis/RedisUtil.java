@@ -10,20 +10,20 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.SortingParams;
 
-@Service
 public class RedisUtil {
 	private Logger log = LoggerFactory.getLogger(RedisUtil.class);
 
-	@Autowired
 	private JedisPool jedisPool;
+	
+	public RedisUtil(JedisPool pool) {
+		this.jedisPool = pool;
+	}
  
 	/**
 	 * 通过key获取储存在redis中的value
