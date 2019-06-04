@@ -3,4 +3,6 @@
 3.start kafka ---->cmd   .\bin\windows\kafka-server-start.bat .\config\server.properties
 4.start mongoDB -->cmd e:   cd MongoDD\bin  mongod --config E:\MongoDB\mongodb.config
 5.start redis ->click redis-server.exe file
-6.start rabbitmq/mysql/ ->youself instal in you windows
+6.start other rabbitmq/mysql/ ->youself instal in you windows
+7.start memcache ->click memcache.exe file
+8.start elasticsearch  -> insert bin/ and click elasticsearch.bat file

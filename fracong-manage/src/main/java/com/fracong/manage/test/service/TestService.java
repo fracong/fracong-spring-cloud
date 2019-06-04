@@ -17,6 +17,7 @@ import com.fracong.test.dao.TestMapper;
 import com.fracong.test.entity.Test;
 import com.fracong.util.constant.ConstantUtil;
 import com.fracong.util.zk.ZkConfig;
+import com.whalin.MemCached.MemCachedClient;
 
 @Service
 public class TestService {
@@ -31,6 +32,8 @@ public class TestService {
     private KafkaTemplate<String, String> template;
 	@CreateCache
 	private Cache<String,Test> jetcache;
+	@Autowired
+    private MemCachedClient memCachedClient;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -117,4 +120,10 @@ public class TestService {
 		Test test = testMapper.selectByPrimaryKey(id);
 		return test;
 	 }
+	
+	public String testMemcache(String id){
+		memCachedClient.set(id, "fracong_"+id);
+		String value = (String)memCachedClient.get(id);
+		return value;
+	}
 }

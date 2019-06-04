@@ -138,4 +138,16 @@ public class TestController {
 		Test test = testService.testGetJetcacheMethod(id);
 		return JSON.toJSONString(test);
 	}
+	
+	/**
+	 * 测试jetcache的方法缓存
+	 * @param id
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/testMemcache/{id}")
+	public String testMemcache(@PathVariable(name="id") String id) throws Exception{
+		String test = testService.testMemcache(id);
+		return JSON.toJSONString(test);
+	}
 }
