@@ -6,3 +6,4 @@
 6.start other rabbitmq/mysql/ ->youself instal in you windows
 7.start memcache ->click memcache.exe file
 8.start elasticsearch  -> insert bin/ and click elasticsearch.bat file
+9.start zipkin  -> java -jar zipkin-server-2.12.9-exec.jar
