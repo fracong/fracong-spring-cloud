@@ -54,5 +54,27 @@
             <artifactId>Memcached-Java-Client</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <!-- zipkin begin-->
+		<dependency>
+		   <groupId>io.zipkin.brave</groupId>
+		   <artifactId>brave-core</artifactId>
+		   <version>3.10.0</version>
+		</dependency>
+		<dependency>
+		   <groupId>io.zipkin.brave</groupId>
+		   <artifactId>brave-spancollector-http</artifactId>
+		   <version>3.10.0</version>
+		</dependency>
+		<dependency>
+		   <groupId>io.zipkin.brave</groupId>
+		   <artifactId>brave-web-servlet-filter</artifactId>
+		   <version>3.10.0</version>
+		</dependency>
+		<dependency>
+		   <groupId>io.zipkin.brave</groupId>
+		   <artifactId>brave-okhttp</artifactId>
+		   <version>3.10.0</version>
+		</dependency>
+		<!-- zipkin end-->
 	</dependencies>
 </project>

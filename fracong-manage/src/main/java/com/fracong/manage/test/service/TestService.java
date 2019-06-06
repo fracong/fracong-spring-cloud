@@ -19,6 +19,10 @@ import com.fracong.util.constant.ConstantUtil;
 import com.fracong.util.zk.ZkConfig;
 import com.whalin.MemCached.MemCachedClient;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 @Service
 public class TestService {
 	@Autowired
@@ -34,6 +38,8 @@ public class TestService {
 	private Cache<String,Test> jetcache;
 	@Autowired
     private MemCachedClient memCachedClient;
+	@Autowired  
+    private OkHttpClient client;
 
 	public Test test(String id) {
 		Test test = testMapper.selectByPrimaryKey(id);
@@ -125,5 +131,11 @@ public class TestService {
 		memCachedClient.set(id, "fracong_"+id);
 		String value = (String)memCachedClient.get(id);
 		return value;
+	}
+	
+	public String testZipkin(String id) throws Exception{
+		Request request = new Request.Builder().url("http://localhost:8889/fracong-service/mytest/test/"+id).build();  
+		Response response = client.newCall(request).execute();
+		return response.body().string();
 	}
 }

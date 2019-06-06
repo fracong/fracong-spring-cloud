@@ -150,4 +150,10 @@ public class TestController {
 		String test = testService.testMemcache(id);
 		return JSON.toJSONString(test);
 	}
+	
+	@GetMapping("/testZipkin/{id}")
+	public String testZipkin(@PathVariable(name="id") String id) throws Exception{
+		String test = testService.testZipkin(id);
+		return JSON.toJSONString(test);
+	}
 }
