@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.fracong.hessian.test.HessianTestInterface;
 import com.fracong.manage.test.annotation.MessageAnnotation;
 import com.fracong.manage.test.annotation.NeedAspest;
 import com.fracong.manage.test.annotation.NeedAspestOnMethod;
@@ -18,6 +19,8 @@ import com.fracong.test.entity.Test;
 public class TestController {
 	@Autowired
 	private TestService testService;
+	@Autowired
+    private HessianTestInterface hessianService;
 	
 	/**
 	 * 普通测试mybatis
@@ -154,6 +157,12 @@ public class TestController {
 	@GetMapping("/testZipkin/{id}")
 	public String testZipkin(@PathVariable(name="id") String id) throws Exception{
 		String test = testService.testZipkin(id);
+		return JSON.toJSONString(test);
+	}
+	
+	@GetMapping("/testHessian/{id}")
+	public String testHessian(@PathVariable(name="id") String id) throws Exception{
+		String test = hessianService.sayTest(id);
 		return JSON.toJSONString(test);
 	}
 }
