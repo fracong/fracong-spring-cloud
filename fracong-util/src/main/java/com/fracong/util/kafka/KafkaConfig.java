@@ -3,6 +3,7 @@ package com.fracong.util.kafka;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
@@ -25,6 +26,8 @@ import org.springframework.kafka.core.ProducerFactory;
 @EnableKafka
 @ConditionalOnProperty(name="fracong.kafka.ip")
 public class KafkaConfig {
+	@Value("${fracong.kafka.enable}")
+	private String enable;
 	@Value("${fracong.kafka.ip}")
 	private String ip;
 	@Value("${fracong.kafka.port}")
@@ -34,6 +37,7 @@ public class KafkaConfig {
     ConcurrentKafkaListenerContainerFactory<Integer, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Integer, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        if(StringUtils.isNotBlank(enable) && "false".equals(enable)) factory.setAutoStartup(false);
         return factory;
     }
 
