@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 public class SwingUtils {
 	
-	public static void main(String[] args) {
+	public static void test() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
