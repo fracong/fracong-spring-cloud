@@ -161,4 +161,31 @@
     set NAME = #{name,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <!-- 
+  	DELIMITER //
+  	CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_tab_test`(IN id INTEGER,IN name VARCHAR(20))
+	BEGIN
+	INSERT INTO tab_test(ID,NAME) VALUES (id,name);
+	END
+	//
+	DELIMITER ;
+	 -->
+  <insert id="insertProcedure" parameterType="com.fracong.test.entity.Test" statementType="CALLABLE">
+	{call insert_tab_test(#{id,mode=IN},#{name,mode=IN})}
+  </insert>
+  <!-- 
+  	DELIMITER //
+	CREATE DEFINER = `root`@`localhost` PROCEDURE `update_tab_test` (
+		IN t_id VARCHAR (20),
+		IN t_name VARCHAR (20)
+	)
+	BEGIN
+		UPDATE tab_test SET NAME = t_name WHERE ID = t_id;
+	END
+	//
+	DELIMITER ;
+	 -->
+  <insert id="updateProcedureById" parameterType="com.fracong.test.entity.Test" statementType="CALLABLE">
+	{call update_tab_test(#{id,mode=IN},#{name,mode=IN})}
+  </insert>
 </mapper>
