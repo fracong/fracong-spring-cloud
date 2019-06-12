@@ -104,5 +104,6 @@
   	<module>fracong-service</module>
   	<module>fracong-manage</module>
   	<module>fracong-gateway-zuul</module>
+  	<module>fracong-cloud-gateway</module>
   </modules>
 </project>

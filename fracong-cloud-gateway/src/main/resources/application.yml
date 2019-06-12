@@ -1,0 +1,27 @@
+server:
+  port: 8891
+spring:
+  application:
+    name: fracong-cloud-gateway
+  redis:
+    host: localhost
+    password:
+    port: 6379
+  cloud:
+    gateway:
+      routes:
+      - id: fracong_route
+        uri: lb://fracong-manage
+        predicates:
+        - Path=/fracong-manage/**
+      - id: fracong_local_route
+        uri: http://localhost:8889
+        predicates:
+        - Path=/fracong-service/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
