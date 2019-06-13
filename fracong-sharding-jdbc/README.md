@@ -1,0 +1,5 @@
+说明：
+1.本文的分表分库策略只针对单分片键数据源分片算法进行分片；（实现接口SingleKeyTableShardingAlgorithm和SingleKeyDatabaseShardingAlgorithm）；
+2.如果在实际使用过程中，发现单分片不够用，可以实现MultipleKeyDatabaseShardingAlgorithm和MultipleKeyTableShardingAlgorithm；
+3.如果表中所有数据均不满足上述策略，则会选择默认的数据源，在默认的数据源中进行查询；
+
