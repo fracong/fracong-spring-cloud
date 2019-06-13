@@ -6,19 +6,24 @@
   <packaging>pom</packaging>
   <name>SpringCloud框架学习</name>
   	<properties>
-		<!--配置方式项目编码-->
         <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
-        <!--配置项目编译打包的java版本-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
+        <logback.core.version>1.1.11</logback.core.version>
         <lombok.version>1.16.18</lombok.version>
         <mybatis-spring-boot>2.0.1</mybatis-spring-boot>
 		<mysql-connector>8.0.16</mysql-connector>
-		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
 		<zpikin.brave.version>3.10.0</zpikin.brave.version>
+		<fastjson.version>1.2.29</fastjson.version>
+		<hessian.version>4.0.38</hessian.version>
+		<sharding.jdbc.version>1.5.4</sharding.jdbc.version>
+		<memcache.version>3.0.2</memcache.version>
+		<zookeeper.client.version>0.11</zookeeper.client.version>
+		<jedis.client.version>2.5.11</jedis.client.version>
     </properties>
 	<dependencyManagement>
         <dependencies>
@@ -38,11 +43,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- mybatis -->
             <dependency>
 		        <groupId>org.mybatis.spring.boot</groupId>
 		        <artifactId>mybatis-spring-boot-starter</artifactId>
 		        <version>${mybatis-spring-boot}</version>
 		    </dependency>
+		    <!-- mysql -->
 		    <dependency>
 		        <groupId>mysql</groupId>
 		        <artifactId>mysql-connector-java</artifactId>
@@ -51,12 +58,12 @@
             <dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
-				<version>1.2.29</version>
+				<version>${fastjson.version}</version>
 			</dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.1.11</version>
+                <version>${logback.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -69,15 +76,17 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!-- hessian -->
             <dependency>
 				<groupId>com.caucho</groupId>
 				<artifactId>hessian</artifactId>
-				<version>4.0.38</version>
+				<version>${hessian.version}</version>
 			</dependency>
+			<!-- sharding-jdbc -->
 			<dependency>
 				<groupId>com.dangdang</groupId>
 				<artifactId>sharding-jdbc-core</artifactId>
-				<version>1.5.4</version>
+				<version>${sharding.jdbc.version}</version>
 			</dependency>
 			<!-- zipkin begin-->
 			<dependency>
@@ -101,6 +110,24 @@
 			   <version>${zpikin.brave.version}</version>
 			</dependency>
 			<!-- zipkin end-->
+			<!-- memcache -->
+			<dependency>
+	            <groupId>com.whalin</groupId>
+	            <artifactId>Memcached-Java-Client</artifactId>
+	            <version>${memcache.version}</version>
+	        </dependency>
+	        <!-- zookeeper -->
+	        <dependency>
+			    <groupId>com.101tec</groupId>
+			    <artifactId>zkclient</artifactId>
+			    <version>${zookeeper.client.version}</version>
+			</dependency>
+			<!-- jedis -->
+			<dependency>
+			    <groupId>com.alicp.jetcache</groupId>
+			    <artifactId>jetcache-starter-redis</artifactId>
+			     <version>${jedis.client.version}</version>
+			</dependency>
         </dependencies>
     </dependencyManagement>
     <build>

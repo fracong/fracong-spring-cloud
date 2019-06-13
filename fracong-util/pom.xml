@@ -39,7 +39,6 @@
 		<dependency>
 		    <groupId>com.101tec</groupId>
 		    <artifactId>zkclient</artifactId>
-		    <version>0.11</version>
 		</dependency>
 		<dependency>
             <groupId>redis.clients</groupId>
@@ -52,7 +51,6 @@
         <dependency>
             <groupId>com.whalin</groupId>
             <artifactId>Memcached-Java-Client</artifactId>
-            <version>3.0.2</version>
         </dependency>
         <!-- zipkin begin-->
 		<dependency>
