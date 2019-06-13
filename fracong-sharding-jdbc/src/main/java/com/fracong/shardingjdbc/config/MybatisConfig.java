@@ -47,7 +47,7 @@ public class MybatisConfig {
     }
 	
 	/**
-	 * 设置分库映射 设置默认库
+	 * 设置分库映射 设置默认库:当一张表不需要进行分表分库的时候，只在一个数据库中存在，那这张表必须在默认数据库中
 	 * @param dataSource0
 	 * @param dataSource1
 	 * @return
@@ -76,10 +76,10 @@ public class MybatisConfig {
 
         //绑定表策略，在查询时会使用主表策略计算路由的数据源，因此需要约定绑定表策略的表的规则需要一致，可以一定程度提高效率
         List<BindingTableRule> bindingTableRules = new ArrayList<BindingTableRule>();
-        bindingTableRules.add(new BindingTableRule(Arrays.asList(userTableRule)));
+        bindingTableRules.add(new BindingTableRule(Arrays.asList(userTableRule)));//说明：如果有多张表需要分表分库，那么改成多加几个Rule
         return ShardingRule.builder()
                 .dataSourceRule(dataSourceRule)
-                .tableRules(Arrays.asList(userTableRule))
+                .tableRules(Arrays.asList(userTableRule))//说明：如果有多张表需要分表分库，那么改成多加几个Rule
                 .bindingTableRules(bindingTableRules)
                 .databaseShardingStrategy(new DatabaseShardingStrategy("sex", new DemoDatabaseShardingAlgorithm()))
                 .tableShardingStrategy(new TableShardingStrategy("id", new DemoTableShardingAlgorithm()))
