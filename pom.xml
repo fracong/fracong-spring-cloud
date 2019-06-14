@@ -1,21 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.fracong</groupId>
-  <artifactId>fracong-spring-cloud</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>SpringCloud框架学习</name>
-  	<properties>
-        <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.fracong</groupId>
+	<artifactId>fracong-spring-cloud</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>SpringCloud框架学习</name>
+	<properties>
+		<project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
-        <junit.version>4.12</junit.version>
-        <log4j.version>1.2.17</log4j.version>
-        <logback.core.version>1.1.11</logback.core.version>
-        <lombok.version>1.16.18</lombok.version>
-        <mybatis-spring-boot>2.0.1</mybatis-spring-boot>
+		<junit.version>4.12</junit.version>
+		<log4j.version>1.2.17</log4j.version>
+		<logback.core.version>1.1.11</logback.core.version>
+		<lombok.version>1.16.18</lombok.version>
+		<mybatis-spring-boot>2.0.1</mybatis-spring-boot>
 		<mysql-connector>8.0.16</mysql-connector>
 		<zpikin.brave.version>3.10.0</zpikin.brave.version>
 		<fastjson.version>1.2.29</fastjson.version>
@@ -24,60 +25,61 @@
 		<memcache.version>3.0.2</memcache.version>
 		<zookeeper.client.version>0.11</zookeeper.client.version>
 		<jedis.client.version>2.5.11</jedis.client.version>
-    </properties>
+		<io.netty.all.version>5.0.0.Alpha2</io.netty.all.version>
+	</properties>
 	<dependencyManagement>
-        <dependencies>
-        	<!--SpringCloud版本-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!--SpringBoot版本-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- mybatis -->
-            <dependency>
-		        <groupId>org.mybatis.spring.boot</groupId>
-		        <artifactId>mybatis-spring-boot-starter</artifactId>
-		        <version>${mybatis-spring-boot}</version>
-		    </dependency>
-		    <!-- mysql -->
-		    <dependency>
-		        <groupId>mysql</groupId>
-		        <artifactId>mysql-connector-java</artifactId>
-		        <version>${mysql-connector}</version>
-		    </dependency>
-            <dependency>
+		<dependencies>
+			<!--SpringCloud版本 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--SpringBoot版本 -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- mybatis -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis-spring-boot}</version>
+			</dependency>
+			<!-- mysql -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
 			</dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <!-- hessian -->
-            <dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<!-- hessian -->
+			<dependency>
 				<groupId>com.caucho</groupId>
 				<artifactId>hessian</artifactId>
 				<version>${hessian.version}</version>
@@ -88,78 +90,83 @@
 				<artifactId>sharding-jdbc-core</artifactId>
 				<version>${sharding.jdbc.version}</version>
 			</dependency>
-			<!-- zipkin begin-->
+			<!-- zipkin begin -->
 			<dependency>
-			   <groupId>io.zipkin.brave</groupId>
-			   <artifactId>brave-core</artifactId>
-			   <version>${zpikin.brave.version}</version>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave-core</artifactId>
+				<version>${zpikin.brave.version}</version>
 			</dependency>
 			<dependency>
-			   <groupId>io.zipkin.brave</groupId>
-			   <artifactId>brave-spancollector-http</artifactId>
-			   <version>${zpikin.brave.version}</version>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave-spancollector-http</artifactId>
+				<version>${zpikin.brave.version}</version>
 			</dependency>
 			<dependency>
-			   <groupId>io.zipkin.brave</groupId>
-			   <artifactId>brave-web-servlet-filter</artifactId>
-			   <version>${zpikin.brave.version}</version>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave-web-servlet-filter</artifactId>
+				<version>${zpikin.brave.version}</version>
 			</dependency>
 			<dependency>
-			   <groupId>io.zipkin.brave</groupId>
-			   <artifactId>brave-okhttp</artifactId>
-			   <version>${zpikin.brave.version}</version>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave-okhttp</artifactId>
+				<version>${zpikin.brave.version}</version>
 			</dependency>
-			<!-- zipkin end-->
+			<!-- zipkin end -->
 			<!-- memcache -->
 			<dependency>
-	            <groupId>com.whalin</groupId>
-	            <artifactId>Memcached-Java-Client</artifactId>
-	            <version>${memcache.version}</version>
-	        </dependency>
-	        <!-- zookeeper -->
-	        <dependency>
-			    <groupId>com.101tec</groupId>
-			    <artifactId>zkclient</artifactId>
-			    <version>${zookeeper.client.version}</version>
+				<groupId>com.whalin</groupId>
+				<artifactId>Memcached-Java-Client</artifactId>
+				<version>${memcache.version}</version>
+			</dependency>
+			<!-- zookeeper -->
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${zookeeper.client.version}</version>
 			</dependency>
 			<!-- jedis -->
 			<dependency>
-			    <groupId>com.alicp.jetcache</groupId>
-			    <artifactId>jetcache-starter-redis</artifactId>
-			     <version>${jedis.client.version}</version>
+				<groupId>com.alicp.jetcache</groupId>
+				<artifactId>jetcache-starter-redis</artifactId>
+				<version>${jedis.client.version}</version>
 			</dependency>
-        </dependencies>
-    </dependencyManagement>
-    <build>
-        <finalName>fracong</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-        	<!--配置一个插件，在resources路径下的以$开头并结尾之间的为变量，可直接取出来-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <delimiters>
-                        <delimit>$</delimit>
-                    </delimiters>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-  <modules>
-  	<module>fracong-core</module>
-  	<module>fracong-html</module>
-  	<module>fracong-eureka-server</module>
-  	<module>fracong-util</module>
-  	<module>fracong-service</module>
-  	<module>fracong-manage</module>
-  	<module>fracong-gateway-zuul</module>
-  	<module>fracong-cloud-gateway</module>
-  	<module>fracong-sharding-jdbc</module>
-  </modules>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${io.netty.all.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<finalName>fracong</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<!--配置一个插件，在resources路径下的以$开头并结尾之间的为变量，可直接取出来 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<delimiters>
+						<delimit>$</delimit>
+					</delimiters>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>fracong-core</module>
+		<module>fracong-html</module>
+		<module>fracong-eureka-server</module>
+		<module>fracong-util</module>
+		<module>fracong-service</module>
+		<module>fracong-manage</module>
+		<module>fracong-gateway-zuul</module>
+		<module>fracong-cloud-gateway</module>
+		<module>fracong-sharding-jdbc</module>
+	</modules>
 </project>
