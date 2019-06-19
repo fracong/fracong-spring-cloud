@@ -11,6 +11,8 @@ public class TestUser implements Serializable{
     private Integer sex;
 
     private String name;
+    
+    private String password;
 
     public Integer getId() {
         return id;
@@ -35,4 +37,12 @@ public class TestUser implements Serializable{
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

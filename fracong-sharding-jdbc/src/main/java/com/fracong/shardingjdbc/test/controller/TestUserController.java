@@ -25,8 +25,8 @@ public class TestUserController {
 		return JSON.toJSONString(test);
 	}
 	
-	@GetMapping("/select/{id}/{sex}")
-	public String test2(@PathVariable(name="id") Integer id,@PathVariable(name="sex") Integer sex){
+	@GetMapping("/select/{id}/{password}")
+	public String test2(@PathVariable(name="id") Integer id,@PathVariable(name="password") String sex){
 		TestUser test = testUserService.selectUser(id,sex);
 		return JSON.toJSONString(test);
 	}

@@ -28,10 +28,10 @@ public class TestUserService {
 		return "ok";
 	}
 
-	public TestUser selectUser(Integer id, Integer sex) {
+	public TestUser selectUser(Integer id, String password) {
 		TestUserExample example = new TestUserExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andIdEqualTo(id).andSexEqualTo(sex);
+		criteria.andIdEqualTo(id).andPasswordEqualTo(password);
 		List<TestUser> list = testUserMapper.selectByExample(example);
 		if(!list.isEmpty()) return list.get(0);
 		return null;
