@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fracong.shardingjdbc.test.dao.TestWebMapper" >
+  <resultMap id="BaseResultMap" type="com.fracong.shardingjdbc.test.entity.TestWeb" >
+    <id column="sq" property="sq" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="VARCHAR" />
+    <result column="web_type" property="webType" jdbcType="VARCHAR" />
+    <result column="web_name" property="webName" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="web_key" property="webKey" jdbcType="VARCHAR" />
+    <result column="page" property="page" jdbcType="VARCHAR" />
+    <result column="base" property="base" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sq, num, web_type, web_name, value, web_key, page, base
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_test_web
+    where sq = #{sq,jdbcType=INTEGER}
+  </select>
+  <select id="queryTestWebList" resultMap="BaseResultMap" parameterType="com.fracong.shardingjdbc.test.entity.PageInfo">
+    select 
+    <include refid="Base_Column_List" />
+    from tab_test_web order by sq limit #{begin,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  <select id="countTestWebList" resultType="java.lang.Integer">
+    select count(1) from tab_test_web
+  </select>
+  <insert id="insert" parameterType="com.fracong.shardingjdbc.test.entity.TestWeb" >
+    insert into tab_test_web (sq, num, web_type, web_name, value, web_key, page, base)
+    values (#{sq,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, #{webType,jdbcType=VARCHAR}, 
+      #{webName,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{webKey,jdbcType=VARCHAR}, 
+      #{page,jdbcType=VARCHAR}, #{base,jdbcType=VARCHAR})
+  </insert>
+</mapper>
