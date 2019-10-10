@@ -36,7 +36,7 @@
     <if test="webName != null">
     	and web_name like concat('%',#{webName},'%') 
     </if>
-    order by sq limit #{pageInfoBegin,jdbcType=INTEGER},#{pageInfoEnd,jdbcType=INTEGER}
+    order by sq limit #{pageInfoBegin,jdbcType=INTEGER},#{pageInfoRows,jdbcType=INTEGER}
   </select>
   <select id="countTestWebList" resultType="java.lang.Integer" parameterType="com.fracong.shardingjdbc.test.entity.TestWeb">
     select count(1) from tab_test_web where 1=1 

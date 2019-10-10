@@ -4,7 +4,6 @@ public class PageInfo {
 	private Integer pageInfoNum;
 	private Integer pageInfoRows;
 	private Integer pageInfoBegin;
-	private Integer pageInfoEnd;
 	
 	public Integer getPageInfoNum() {
 		return pageInfoNum;
@@ -23,21 +22,13 @@ public class PageInfo {
 	public Integer getPageInfoBegin() {
 		return pageInfoBegin;
 	}
+	
 	public void setPageInfoBegin() {
 		this.pageInfoBegin = this.ifSetFlag()?(this.pageInfoNum-1)*this.pageInfoRows:0;
 	}
-	public Integer getPageInfoEnd() {
-		return pageInfoEnd;
-	}
-	public void setPageInfoEnd() {
-		this.pageInfoEnd = this.ifSetFlag()?this.pageInfoNum*this.pageInfoRows:10;
-	}
 	
 	public void setBeginAndEnd() {
-		if(ifSetFlag()) {
-			this.setPageInfoBegin();
-			this.setPageInfoEnd();
-		}
+		if(ifSetFlag()) this.setPageInfoBegin();
 	}
 	
 	public boolean ifSetFlag() {

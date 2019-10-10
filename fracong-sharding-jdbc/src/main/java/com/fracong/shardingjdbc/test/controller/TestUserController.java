@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +58,14 @@ public class TestUserController {
 		web.setWebKey(key);
 		web.setPage(page);
 		web.setBase(base);
+		testUserService.insertTestWeb(web);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("flag", "success");
+		return jsonObject.toJSONString();
+	}
+	
+	@PostMapping("/insertTestWeb")
+	public String test4(@RequestBody TestWeb web){
 		testUserService.insertTestWeb(web);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("flag", "success");
