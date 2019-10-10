@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.fracong.shardingjdbc.test.dao.TestFracongMapper;
 import com.fracong.shardingjdbc.test.dao.TestUserMapper;
 import com.fracong.shardingjdbc.test.dao.TestWebMapper;
-import com.fracong.shardingjdbc.test.entity.PageInfo;
 import com.fracong.shardingjdbc.test.entity.TestFracong;
 import com.fracong.shardingjdbc.test.entity.TestUser;
 import com.fracong.shardingjdbc.test.entity.TestUserExample;
@@ -53,20 +52,13 @@ public class TestUserService {
 		System.err.println(insert);
 	}
 
-	public List<TestWeb> queryTestWebList(String page, String num) {
-		Integer pageInt = Integer.valueOf(page);
-		Integer numInt = Integer.valueOf(num);
-		Integer begin = (pageInt-1)*numInt;
-		Integer end = pageInt*numInt;
-		PageInfo pageInfo = new PageInfo();
-		pageInfo.setBegin(begin);
-		pageInfo.setEnd(end);
-		List<TestWeb> list = testWebMapper.queryTestWebList(pageInfo);
+	public List<TestWeb> queryTestWebList(TestWeb testWeb) {
+		List<TestWeb> list = testWebMapper.queryTestWebList(testWeb);
 		return list;
 	}
 
-	public Integer countTestWebList() {
-		Integer total = testWebMapper.countTestWebList();
+	public Integer countTestWebList(TestWeb testWeb) {
+		Integer total = testWebMapper.countTestWebList(testWeb);
 		return total;
 	}
 }

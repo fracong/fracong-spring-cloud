@@ -1,6 +1,6 @@
 package com.fracong.shardingjdbc.test.entity;
 
-public class TestWeb {
+public class TestWeb extends PageInfo{
 	private String sq;
 	private String num;
 	private String webType;

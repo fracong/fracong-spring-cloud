@@ -20,13 +20,38 @@
     from tab_test_web
     where sq = #{sq,jdbcType=INTEGER}
   </select>
-  <select id="queryTestWebList" resultMap="BaseResultMap" parameterType="com.fracong.shardingjdbc.test.entity.PageInfo">
+  <select id="queryTestWebList" resultMap="BaseResultMap" parameterType="com.fracong.shardingjdbc.test.entity.TestWeb">
     select 
     <include refid="Base_Column_List" />
-    from tab_test_web order by sq limit #{begin,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+    from tab_test_web where 1=1 
+    <if test="sq != null">
+    	and sq like concat('%',#{sq},'%') 
+    </if>
+    <if test="num != null">
+    	and num like concat('%',#{num},'%') 
+    </if>
+    <if test="webType != null">
+    	and web_type like concat('%',#{webType},'%') 
+    </if>
+    <if test="webName != null">
+    	and web_name like concat('%',#{webName},'%') 
+    </if>
+    order by sq limit #{pageInfoBegin,jdbcType=INTEGER},#{pageInfoEnd,jdbcType=INTEGER}
   </select>
-  <select id="countTestWebList" resultType="java.lang.Integer">
-    select count(1) from tab_test_web
+  <select id="countTestWebList" resultType="java.lang.Integer" parameterType="com.fracong.shardingjdbc.test.entity.TestWeb">
+    select count(1) from tab_test_web where 1=1 
+    <if test="sq != null">
+    	and sq like concat('%',#{sq},'%') 
+    </if>
+    <if test="num != null">
+    	and num like concat('%',#{num},'%') 
+    </if>
+    <if test="webType != null">
+    	and web_type like concat('%',#{webType},'%') 
+    </if>
+    <if test="webName != null">
+    	and web_name like concat('%',#{webName},'%') 
+    </if>
   </select>
   <insert id="insert" parameterType="com.fracong.shardingjdbc.test.entity.TestWeb" >
     insert into tab_test_web (sq, num, web_type, web_name, value, web_key, page, base)

@@ -2,6 +2,7 @@ package com.fracong.shardingjdbc.test.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,13 +62,22 @@ public class TestUserController {
 		return jsonObject.toJSONString();
 	}
 	
-	@GetMapping("/queryTestWeb/list/{num}/{page}")
-	public String test5(@PathVariable(name="page") String page,@PathVariable(name="num") String num){
-		List<TestWeb> list = testUserService.queryTestWebList(page, num);
+	@GetMapping("/queryTestWeb/list/{sq}/{num}/{type}/{name}/{pageInfoRows}/{pageInfoNum}")
+	public String test5(@PathVariable(name="sq") String sq,@PathVariable(name="num") String num,
+			@PathVariable(name="type") String type, @PathVariable(name="name") String name,
+			@PathVariable(name="pageInfoNum") Integer pageInfoNum,@PathVariable(name="pageInfoRows") Integer pageInfoRows){
+		TestWeb testWeb = new TestWeb();
+		if(StringUtils.isNotBlank(sq) && !"FFFFFFFF".equals(sq)) testWeb.setSq(sq);
+		if(StringUtils.isNotBlank(num) && !"FFFFFFFF".equals(num)) testWeb.setNum(num);
+		if(StringUtils.isNotBlank(type) && !"FFFFFFFF".equals(type)) testWeb.setWebType(type);
+		if(StringUtils.isNotBlank(name) && !"FFFFFFFF".equals(name)) testWeb.setWebName(name);
+		testWeb.setPageInfoNum(pageInfoNum);
+		testWeb.setPageInfoRows(pageInfoRows);
+		List<TestWeb> list = testUserService.queryTestWebList(testWeb);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("list", list);
 		jsonObject.put("flag", "success");
-		Integer total = testUserService.countTestWebList();
+		Integer total = testUserService.countTestWebList(testWeb);
 		jsonObject.put("total", total);
 		return jsonObject.toJSONString();
 	}
