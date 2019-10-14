@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
@@ -66,6 +67,26 @@ public class TestUserController {
 	
 	@PostMapping("/insertTestWeb")
 	public String test4(@RequestBody TestWeb web){
+		testUserService.insertTestWeb(web);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("flag", "success");
+		return jsonObject.toJSONString();
+	}
+	
+	@PostMapping("/insertTestWeb2") 
+	public String test6(@RequestParam(name = "sq") String sq, @RequestParam(name = "webNum") String num, 
+			@RequestParam(name = "webName") String name, @RequestParam(name = "key") String key, 
+			@RequestParam(name = "value") String value, @RequestParam(name = "webType") String type,
+			@RequestParam(name = "page") String page, @RequestParam(name = "base") String base){
+		TestWeb web = new TestWeb();
+		web.setSq(sq);
+		web.setNum(num);
+		web.setWebName(name);
+		web.setWebKey(key);
+		web.setValue(value);
+		web.setWebType(type);
+		web.setPage(page);
+		web.setBase(base);
 		testUserService.insertTestWeb(web);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("flag", "success");
