@@ -1,8 +1,14 @@
 package com.fracong.shardingjdbc.test.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +28,7 @@ import com.fracong.shardingjdbc.test.service.TestUserService;
 @RestController
 @RequestMapping("/testuser")
 public class TestUserController {
-
+	private static final Logger logger = LoggerFactory.getLogger(TestUserController.class);
 	@Autowired
 	private TestUserService testUserService;
 	
@@ -70,7 +76,7 @@ public class TestUserController {
 		testUserService.insertTestWeb(web);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("flag", "success");
-		return jsonObject.toJSONString();
+		return JSON.toJSONString(jsonObject);
 	}
 	
 	@PostMapping("/insertTestWeb2") 
@@ -111,5 +117,30 @@ public class TestUserController {
 		Integer total = testUserService.countTestWebList(testWeb);
 		jsonObject.put("total", total);
 		return jsonObject.toJSONString();
+	}
+	
+	@RequestMapping("/jsonp/user/{id}")
+	public void test7(HttpServletResponse response, @RequestParam(name = "callback") String callbackName,
+			@PathVariable(name = "id") Integer id) {
+		response.setContentType("text/javascript");
+		TestFracong test = testUserService.selectFracong(id);
+		Writer writer = null;
+		try {
+			writer = response.getWriter();
+			writer.write(callbackName + "(");
+			writer.write(JSON.toJSONString(test));
+			writer.write(");");
+		} catch (IOException e) {
+			logger.error("jsonp Error：" + JSON.toJSONString(test), e);
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					logger.error("writer close error！", e);
+				}
+				writer = null;
+			}
+		}
 	}
 }
