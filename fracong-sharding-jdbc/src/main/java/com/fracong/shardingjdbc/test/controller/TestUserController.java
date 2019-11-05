@@ -2,6 +2,7 @@ package com.fracong.shardingjdbc.test.controller;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fracong.shardingjdbc.test.entity.LocalDateTimeEntity;
 import com.fracong.shardingjdbc.test.entity.TestFracong;
 import com.fracong.shardingjdbc.test.entity.TestUser;
 import com.fracong.shardingjdbc.test.entity.TestWeb;
@@ -142,5 +144,18 @@ public class TestUserController {
 				writer = null;
 			}
 		}
+	}
+	
+	@GetMapping("/localDateTime/out")
+	public LocalDateTimeEntity testLocalDateTime1() {
+		LocalDateTimeEntity entity = new LocalDateTimeEntity();
+		entity.setLocalDateTime(LocalDateTime.now());
+		return entity;
+	}
+	
+	@PostMapping("/localDateTime/in")
+	public String testLocalDateTime2(@RequestBody LocalDateTimeEntity entity) {
+		System.err.println(entity.getLocalDateTime2());
+		return "ok";
 	}
 }
