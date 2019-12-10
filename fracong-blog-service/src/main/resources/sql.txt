@@ -1,0 +1,19 @@
+1.blog_content
+CREATE TABLE fracong_test.blog_content (
+	conetent_id BIGINT NOT NULL AUTO_INCREMENT,
+	user_id varchar(100) NULL,
+	content TEXT NULL,
+	create_time DATETIME NULL,
+	create_id varchar(100) NULL,
+	update_time DATETIME NULL,
+	update_id varchar(100) NULL,
+	source_name varchar(100) NULL,
+	view_num BIGINT NULL,
+	section_id varchar(100) NULL,
+	status INT NULL,
+	content_id varchar(100) NULL,
+	CONSTRAINT blog_content_PK PRIMARY KEY (conetent_id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
