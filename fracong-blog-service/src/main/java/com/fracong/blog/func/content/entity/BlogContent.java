@@ -12,6 +12,8 @@ public class BlogContent implements Serializable {
 
     private String userId;
 
+    private String contentName;
+
     private Date createTime;
 
     private String createId;
@@ -46,6 +48,14 @@ public class BlogContent implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getContentName() {
+        return contentName;
+    }
+
+    public void setContentName(String contentName) {
+        this.contentName = contentName;
     }
 
     public Date getCreateTime() {
