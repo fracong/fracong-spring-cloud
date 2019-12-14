@@ -5,7 +5,8 @@
     <artifactId>fracong-spring-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>fracong_blog</artifactId>
+  <artifactId>fracong-blog-html</artifactId>
+  <name>fracong-blog-html</name>
   <packaging>war</packaging>
   <properties>
 		<project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
