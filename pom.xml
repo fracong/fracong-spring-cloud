@@ -170,5 +170,6 @@
 		<module>fracong-sharding-jdbc</module>
     <module>fracong-blog-service</module>
     <module>fracong-blog-html</module>
+    <module>fracong-blog-cms</module>
 	</modules>
 </project>

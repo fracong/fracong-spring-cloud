@@ -19,6 +19,7 @@ public class ContentService {
 		newBlogContent.setContentId(id);
 		newBlogContent.setViewNum(blogContent.getViewNum()+1);
 		blogContentDao.updateByPrimaryKeySelective(newBlogContent);
+		blogContent.setViewNum(blogContent.getViewNum()+1);
 		return blogContent;
 	}
 
