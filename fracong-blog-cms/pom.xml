@@ -5,8 +5,8 @@
     <artifactId>fracong-spring-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>fracong-blog-cms</artifactId>
-  <name>fracong-blog-cms</name>
+  <artifactId>fracong-blog-cms-service</artifactId>
+  <name>fracong-blog-cms-service</name>
   <url>http://maven.apache.org</url>
   <packaging>jar</packaging>
   <properties>
