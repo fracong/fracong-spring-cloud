@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fracong.blog.func.user.dao.CmsUserOperationDao">
+  <resultMap id="BaseResultMap" type="com.fracong.blog.func.user.entity.CmsUserOperation">
+    <id column="OPERATION_ID" jdbcType="VARCHAR" property="operationId" />
+    <result column="OPERATION_NAME" jdbcType="VARCHAR" property="operationName" />
+    <result column="OPERATION_BRIEF" jdbcType="VARCHAR" property="operationBrief" />
+    <result column="OPERATION_TYPE" jdbcType="DECIMAL" property="operationType" />
+    <result column="OPERATION_TAG" jdbcType="VARCHAR" property="operationTag" />
+    <result column="CREATE_ID" jdbcType="VARCHAR" property="createId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="DELETE_FLG" jdbcType="DECIMAL" property="deleteFlg" />
+    <result column="LASTMODIFY_ID" jdbcType="VARCHAR" property="lastmodifyId" />
+    <result column="LASTMODIFY_TIME" jdbcType="TIMESTAMP" property="lastmodifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OPERATION_ID, OPERATION_NAME, OPERATION_BRIEF, OPERATION_TYPE, OPERATION_TAG, CREATE_ID, 
+    CREATE_TIME, DELETE_FLG, LASTMODIFY_ID, LASTMODIFY_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.fracong.blog.func.user.entity.CmsUserOperationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_cms_user_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_cms_user_operation
+    where OPERATION_ID = #{operationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from blog_cms_user_operation
+    where OPERATION_ID = #{operationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fracong.blog.func.user.entity.CmsUserOperationExample">
+    delete from blog_cms_user_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fracong.blog.func.user.entity.CmsUserOperation">
+    insert into blog_cms_user_operation (OPERATION_ID, OPERATION_NAME, OPERATION_BRIEF, 
+      OPERATION_TYPE, OPERATION_TAG, CREATE_ID, 
+      CREATE_TIME, DELETE_FLG, LASTMODIFY_ID, 
+      LASTMODIFY_TIME)
+    values (#{operationId,jdbcType=VARCHAR}, #{operationName,jdbcType=VARCHAR}, #{operationBrief,jdbcType=VARCHAR}, 
+      #{operationType,jdbcType=DECIMAL}, #{operationTag,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{deleteFlg,jdbcType=DECIMAL}, #{lastmodifyId,jdbcType=VARCHAR}, 
+      #{lastmodifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fracong.blog.func.user.entity.CmsUserOperation">
+    insert into blog_cms_user_operation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        OPERATION_ID,
+      </if>
+      <if test="operationName != null">
+        OPERATION_NAME,
+      </if>
+      <if test="operationBrief != null">
+        OPERATION_BRIEF,
+      </if>
+      <if test="operationType != null">
+        OPERATION_TYPE,
+      </if>
+      <if test="operationTag != null">
+        OPERATION_TAG,
+      </if>
+      <if test="createId != null">
+        CREATE_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="deleteFlg != null">
+        DELETE_FLG,
+      </if>
+      <if test="lastmodifyId != null">
+        LASTMODIFY_ID,
+      </if>
+      <if test="lastmodifyTime != null">
+        LASTMODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null">
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationBrief != null">
+        #{operationBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null">
+        #{operationType,jdbcType=DECIMAL},
+      </if>
+      <if test="operationTag != null">
+        #{operationTag,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlg != null">
+        #{deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="lastmodifyId != null">
+        #{lastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifyTime != null">
+        #{lastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fracong.blog.func.user.entity.CmsUserOperationExample" resultType="java.lang.Long">
+    select count(*) from blog_cms_user_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update blog_cms_user_operation
+    <set>
+      <if test="record.operationId != null">
+        OPERATION_ID = #{record.operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationName != null">
+        OPERATION_NAME = #{record.operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationBrief != null">
+        OPERATION_BRIEF = #{record.operationBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationType != null">
+        OPERATION_TYPE = #{record.operationType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operationTag != null">
+        OPERATION_TAG = #{record.operationTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null">
+        CREATE_ID = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlg != null">
+        DELETE_FLG = #{record.deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastmodifyId != null">
+        LASTMODIFY_ID = #{record.lastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastmodifyTime != null">
+        LASTMODIFY_TIME = #{record.lastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update blog_cms_user_operation
+    set OPERATION_ID = #{record.operationId,jdbcType=VARCHAR},
+      OPERATION_NAME = #{record.operationName,jdbcType=VARCHAR},
+      OPERATION_BRIEF = #{record.operationBrief,jdbcType=VARCHAR},
+      OPERATION_TYPE = #{record.operationType,jdbcType=DECIMAL},
+      OPERATION_TAG = #{record.operationTag,jdbcType=VARCHAR},
+      CREATE_ID = #{record.createId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      DELETE_FLG = #{record.deleteFlg,jdbcType=DECIMAL},
+      LASTMODIFY_ID = #{record.lastmodifyId,jdbcType=VARCHAR},
+      LASTMODIFY_TIME = #{record.lastmodifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fracong.blog.func.user.entity.CmsUserOperation">
+    update blog_cms_user_operation
+    <set>
+      <if test="operationName != null">
+        OPERATION_NAME = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationBrief != null">
+        OPERATION_BRIEF = #{operationBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null">
+        OPERATION_TYPE = #{operationType,jdbcType=DECIMAL},
+      </if>
+      <if test="operationTag != null">
+        OPERATION_TAG = #{operationTag,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        CREATE_ID = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlg != null">
+        DELETE_FLG = #{deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="lastmodifyId != null">
+        LASTMODIFY_ID = #{lastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifyTime != null">
+        LASTMODIFY_TIME = #{lastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where OPERATION_ID = #{operationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fracong.blog.func.user.entity.CmsUserOperation">
+    update blog_cms_user_operation
+    set OPERATION_NAME = #{operationName,jdbcType=VARCHAR},
+      OPERATION_BRIEF = #{operationBrief,jdbcType=VARCHAR},
+      OPERATION_TYPE = #{operationType,jdbcType=DECIMAL},
+      OPERATION_TAG = #{operationTag,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      DELETE_FLG = #{deleteFlg,jdbcType=DECIMAL},
+      LASTMODIFY_ID = #{lastmodifyId,jdbcType=VARCHAR},
+      LASTMODIFY_TIME = #{lastmodifyTime,jdbcType=TIMESTAMP}
+    where OPERATION_ID = #{operationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

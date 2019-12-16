@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fracong.blog.func.role.dao.CmsRoleDao">
+  <resultMap id="BaseResultMap" type="com.fracong.blog.func.role.entity.CmsRole">
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_EN_NAME" jdbcType="VARCHAR" property="roleEnName" />
+    <result column="ROLE_BRIEF" jdbcType="VARCHAR" property="roleBrief" />
+    <result column="ROLE_CREATE_TIME" jdbcType="TIMESTAMP" property="roleCreateTime" />
+    <result column="ROLE_CREATE_ID" jdbcType="VARCHAR" property="roleCreateId" />
+    <result column="ROLE_STATE_FLAG" jdbcType="DECIMAL" property="roleStateFlag" />
+    <result column="ROLE_LASTMODIFY_TIME" jdbcType="TIMESTAMP" property="roleLastmodifyTime" />
+    <result column="ROLE_LASTMODIFY_ID" jdbcType="VARCHAR" property="roleLastmodifyId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ROLE_ID, ROLE_NAME, ROLE_EN_NAME, ROLE_BRIEF, ROLE_CREATE_TIME, ROLE_CREATE_ID, ROLE_STATE_FLAG, 
+    ROLE_LASTMODIFY_TIME, ROLE_LASTMODIFY_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.fracong.blog.func.role.entity.CmsRoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_cms_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_cms_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from blog_cms_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fracong.blog.func.role.entity.CmsRoleExample">
+    delete from blog_cms_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fracong.blog.func.role.entity.CmsRole">
+    insert into blog_cms_role (ROLE_ID, ROLE_NAME, ROLE_EN_NAME, 
+      ROLE_BRIEF, ROLE_CREATE_TIME, ROLE_CREATE_ID, 
+      ROLE_STATE_FLAG, ROLE_LASTMODIFY_TIME, ROLE_LASTMODIFY_ID
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleEnName,jdbcType=VARCHAR}, 
+      #{roleBrief,jdbcType=VARCHAR}, #{roleCreateTime,jdbcType=TIMESTAMP}, #{roleCreateId,jdbcType=VARCHAR}, 
+      #{roleStateFlag,jdbcType=DECIMAL}, #{roleLastmodifyTime,jdbcType=TIMESTAMP}, #{roleLastmodifyId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fracong.blog.func.role.entity.CmsRole">
+    insert into blog_cms_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="roleEnName != null">
+        ROLE_EN_NAME,
+      </if>
+      <if test="roleBrief != null">
+        ROLE_BRIEF,
+      </if>
+      <if test="roleCreateTime != null">
+        ROLE_CREATE_TIME,
+      </if>
+      <if test="roleCreateId != null">
+        ROLE_CREATE_ID,
+      </if>
+      <if test="roleStateFlag != null">
+        ROLE_STATE_FLAG,
+      </if>
+      <if test="roleLastmodifyTime != null">
+        ROLE_LASTMODIFY_TIME,
+      </if>
+      <if test="roleLastmodifyId != null">
+        ROLE_LASTMODIFY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEnName != null">
+        #{roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleBrief != null">
+        #{roleBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateTime != null">
+        #{roleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCreateId != null">
+        #{roleCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleStateFlag != null">
+        #{roleStateFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="roleLastmodifyTime != null">
+        #{roleLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleLastmodifyId != null">
+        #{roleLastmodifyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fracong.blog.func.role.entity.CmsRoleExample" resultType="java.lang.Long">
+    select count(*) from blog_cms_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update blog_cms_role
+    <set>
+      <if test="record.roleId != null">
+        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleName != null">
+        ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleEnName != null">
+        ROLE_EN_NAME = #{record.roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleBrief != null">
+        ROLE_BRIEF = #{record.roleBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleCreateTime != null">
+        ROLE_CREATE_TIME = #{record.roleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roleCreateId != null">
+        ROLE_CREATE_ID = #{record.roleCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleStateFlag != null">
+        ROLE_STATE_FLAG = #{record.roleStateFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleLastmodifyTime != null">
+        ROLE_LASTMODIFY_TIME = #{record.roleLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roleLastmodifyId != null">
+        ROLE_LASTMODIFY_ID = #{record.roleLastmodifyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update blog_cms_role
+    set ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+      ROLE_EN_NAME = #{record.roleEnName,jdbcType=VARCHAR},
+      ROLE_BRIEF = #{record.roleBrief,jdbcType=VARCHAR},
+      ROLE_CREATE_TIME = #{record.roleCreateTime,jdbcType=TIMESTAMP},
+      ROLE_CREATE_ID = #{record.roleCreateId,jdbcType=VARCHAR},
+      ROLE_STATE_FLAG = #{record.roleStateFlag,jdbcType=DECIMAL},
+      ROLE_LASTMODIFY_TIME = #{record.roleLastmodifyTime,jdbcType=TIMESTAMP},
+      ROLE_LASTMODIFY_ID = #{record.roleLastmodifyId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fracong.blog.func.role.entity.CmsRole">
+    update blog_cms_role
+    <set>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEnName != null">
+        ROLE_EN_NAME = #{roleEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleBrief != null">
+        ROLE_BRIEF = #{roleBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateTime != null">
+        ROLE_CREATE_TIME = #{roleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCreateId != null">
+        ROLE_CREATE_ID = #{roleCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleStateFlag != null">
+        ROLE_STATE_FLAG = #{roleStateFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="roleLastmodifyTime != null">
+        ROLE_LASTMODIFY_TIME = #{roleLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleLastmodifyId != null">
+        ROLE_LASTMODIFY_ID = #{roleLastmodifyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fracong.blog.func.role.entity.CmsRole">
+    update blog_cms_role
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_EN_NAME = #{roleEnName,jdbcType=VARCHAR},
+      ROLE_BRIEF = #{roleBrief,jdbcType=VARCHAR},
+      ROLE_CREATE_TIME = #{roleCreateTime,jdbcType=TIMESTAMP},
+      ROLE_CREATE_ID = #{roleCreateId,jdbcType=VARCHAR},
+      ROLE_STATE_FLAG = #{roleStateFlag,jdbcType=DECIMAL},
+      ROLE_LASTMODIFY_TIME = #{roleLastmodifyTime,jdbcType=TIMESTAMP},
+      ROLE_LASTMODIFY_ID = #{roleLastmodifyId,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

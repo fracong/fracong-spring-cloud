@@ -23,4 +23,6 @@ public class ResponseInfoUtil {
 	public static final String ALL_LIST = "allList";
 	public static final String RETURN_LIST = "returnList";
 	public static final String CMS_MENU_LIST = "cmsMenuList";
+	public static final String UNDER_LINE = "_";
+	public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }

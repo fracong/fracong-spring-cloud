@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fracong.blog.func.menu.dao.CmsMenuDao">
+  <resultMap id="BaseResultMap" type="com.fracong.blog.func.menu.entity.CmsMenu">
+    <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+    <result column="MENU_KEY" jdbcType="VARCHAR" property="menuKey" />
+    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="OPEN_TYPE" jdbcType="DECIMAL" property="openType" />
+    <result column="DELETE_FLG" jdbcType="DECIMAL" property="deleteFlg" />
+    <result column="PARENT_MENU_ID" jdbcType="VARCHAR" property="parentMenuId" />
+    <result column="ORDER_NUM" jdbcType="INTEGER" property="orderNum" />
+    <result column="MENU_CREATE_ID" jdbcType="VARCHAR" property="menuCreateId" />
+    <result column="MENU_CREATE_TIME" jdbcType="TIMESTAMP" property="menuCreateTime" />
+    <result column="MENU_LASTMODIFY_ID" jdbcType="VARCHAR" property="menuLastmodifyId" />
+    <result column="MENU_LASTMODIFY_TIME" jdbcType="TIMESTAMP" property="menuLastmodifyTime" />
+    <result column="MENU_CSS_CLASS" jdbcType="VARCHAR" property="menuCssClass" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MENU_ID, MENU_KEY, MENU_NAME, MENU_URL, OPEN_TYPE, DELETE_FLG, PARENT_MENU_ID, ORDER_NUM, 
+    MENU_CREATE_ID, MENU_CREATE_TIME, MENU_LASTMODIFY_ID, MENU_LASTMODIFY_TIME, MENU_CSS_CLASS
+  </sql>
+  <select id="selectByExample" parameterType="com.fracong.blog.func.menu.entity.CmsMenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_cms_menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_cms_menu
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from blog_cms_menu
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fracong.blog.func.menu.entity.CmsMenuExample">
+    delete from blog_cms_menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fracong.blog.func.menu.entity.CmsMenu">
+    insert into blog_cms_menu (MENU_ID, MENU_KEY, MENU_NAME, 
+      MENU_URL, OPEN_TYPE, DELETE_FLG, 
+      PARENT_MENU_ID, ORDER_NUM, MENU_CREATE_ID, 
+      MENU_CREATE_TIME, MENU_LASTMODIFY_ID, MENU_LASTMODIFY_TIME, 
+      MENU_CSS_CLASS)
+    values (#{menuId,jdbcType=VARCHAR}, #{menuKey,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{openType,jdbcType=DECIMAL}, #{deleteFlg,jdbcType=DECIMAL}, 
+      #{parentMenuId,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{menuCreateId,jdbcType=VARCHAR}, 
+      #{menuCreateTime,jdbcType=TIMESTAMP}, #{menuLastmodifyId,jdbcType=VARCHAR}, #{menuLastmodifyTime,jdbcType=TIMESTAMP}, 
+      #{menuCssClass,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fracong.blog.func.menu.entity.CmsMenu">
+    insert into blog_cms_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
+      <if test="menuKey != null">
+        MENU_KEY,
+      </if>
+      <if test="menuName != null">
+        MENU_NAME,
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL,
+      </if>
+      <if test="openType != null">
+        OPEN_TYPE,
+      </if>
+      <if test="deleteFlg != null">
+        DELETE_FLG,
+      </if>
+      <if test="parentMenuId != null">
+        PARENT_MENU_ID,
+      </if>
+      <if test="orderNum != null">
+        ORDER_NUM,
+      </if>
+      <if test="menuCreateId != null">
+        MENU_CREATE_ID,
+      </if>
+      <if test="menuCreateTime != null">
+        MENU_CREATE_TIME,
+      </if>
+      <if test="menuLastmodifyId != null">
+        MENU_LASTMODIFY_ID,
+      </if>
+      <if test="menuLastmodifyTime != null">
+        MENU_LASTMODIFY_TIME,
+      </if>
+      <if test="menuCssClass != null">
+        MENU_CSS_CLASS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuKey != null">
+        #{menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="openType != null">
+        #{openType,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlg != null">
+        #{deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="parentMenuId != null">
+        #{parentMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="menuCreateId != null">
+        #{menuCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCreateTime != null">
+        #{menuCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuLastmodifyId != null">
+        #{menuLastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLastmodifyTime != null">
+        #{menuLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuCssClass != null">
+        #{menuCssClass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fracong.blog.func.menu.entity.CmsMenuExample" resultType="java.lang.Long">
+    select count(*) from blog_cms_menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update blog_cms_menu
+    <set>
+      <if test="record.menuId != null">
+        MENU_ID = #{record.menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuKey != null">
+        MENU_KEY = #{record.menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuName != null">
+        MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuUrl != null">
+        MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openType != null">
+        OPEN_TYPE = #{record.openType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deleteFlg != null">
+        DELETE_FLG = #{record.deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parentMenuId != null">
+        PARENT_MENU_ID = #{record.parentMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null">
+        ORDER_NUM = #{record.orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuCreateId != null">
+        MENU_CREATE_ID = #{record.menuCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuCreateTime != null">
+        MENU_CREATE_TIME = #{record.menuCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.menuLastmodifyId != null">
+        MENU_LASTMODIFY_ID = #{record.menuLastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuLastmodifyTime != null">
+        MENU_LASTMODIFY_TIME = #{record.menuLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.menuCssClass != null">
+        MENU_CSS_CLASS = #{record.menuCssClass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update blog_cms_menu
+    set MENU_ID = #{record.menuId,jdbcType=VARCHAR},
+      MENU_KEY = #{record.menuKey,jdbcType=VARCHAR},
+      MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
+      OPEN_TYPE = #{record.openType,jdbcType=DECIMAL},
+      DELETE_FLG = #{record.deleteFlg,jdbcType=DECIMAL},
+      PARENT_MENU_ID = #{record.parentMenuId,jdbcType=VARCHAR},
+      ORDER_NUM = #{record.orderNum,jdbcType=INTEGER},
+      MENU_CREATE_ID = #{record.menuCreateId,jdbcType=VARCHAR},
+      MENU_CREATE_TIME = #{record.menuCreateTime,jdbcType=TIMESTAMP},
+      MENU_LASTMODIFY_ID = #{record.menuLastmodifyId,jdbcType=VARCHAR},
+      MENU_LASTMODIFY_TIME = #{record.menuLastmodifyTime,jdbcType=TIMESTAMP},
+      MENU_CSS_CLASS = #{record.menuCssClass,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fracong.blog.func.menu.entity.CmsMenu">
+    update blog_cms_menu
+    <set>
+      <if test="menuKey != null">
+        MENU_KEY = #{menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="openType != null">
+        OPEN_TYPE = #{openType,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlg != null">
+        DELETE_FLG = #{deleteFlg,jdbcType=DECIMAL},
+      </if>
+      <if test="parentMenuId != null">
+        PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="menuCreateId != null">
+        MENU_CREATE_ID = #{menuCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCreateTime != null">
+        MENU_CREATE_TIME = #{menuCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuLastmodifyId != null">
+        MENU_LASTMODIFY_ID = #{menuLastmodifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLastmodifyTime != null">
+        MENU_LASTMODIFY_TIME = #{menuLastmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuCssClass != null">
+        MENU_CSS_CLASS = #{menuCssClass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fracong.blog.func.menu.entity.CmsMenu">
+    update blog_cms_menu
+    set MENU_KEY = #{menuKey,jdbcType=VARCHAR},
+      MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      OPEN_TYPE = #{openType,jdbcType=DECIMAL},
+      DELETE_FLG = #{deleteFlg,jdbcType=DECIMAL},
+      PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},
+      ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      MENU_CREATE_ID = #{menuCreateId,jdbcType=VARCHAR},
+      MENU_CREATE_TIME = #{menuCreateTime,jdbcType=TIMESTAMP},
+      MENU_LASTMODIFY_ID = #{menuLastmodifyId,jdbcType=VARCHAR},
+      MENU_LASTMODIFY_TIME = #{menuLastmodifyTime,jdbcType=TIMESTAMP},
+      MENU_CSS_CLASS = #{menuCssClass,jdbcType=VARCHAR}
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>
