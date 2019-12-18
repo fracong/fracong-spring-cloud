@@ -26,6 +26,15 @@
   <header>
   	<!--超小屏幕不显示-->
     <div class="hidden-xs header">
+	  <div class="blog-top" >
+	  	<div class="top-container">
+	  		<div class="top-logo"><img src="./whole/images/top_logo.png"/></div>
+	  		<button class="btn btn-default btn-search login-btn" onclick="showLogin()">登陆</button>
+		  	<div class="user_name_class hidden"  >
+		  		<strong style="color: royalblue;">Welcome, fracong</strong>
+		  	</div>
+	  	</div>
+	  </div>
       <h1 class="logo"> 
       	<a href="./color.html" title="Fracong技术博客 - POWERED BY WY ALL RIGHTS RESERVED"></a> 
       </h1>
@@ -66,6 +75,42 @@
     </div>
   </header>
   <!--/超小屏幕可见-->
+  <!-- 登陆modal框 -->
+  <div class="modal fade" id="loginModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+						<h4 class="modal-title" align="center">登录框</h4>
+						<br/>
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="name" class="col-sm-offset-2 col-sm-2 control-label">账号</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="name" placeholder="请输您的入账号">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-offset-2 col-sm-2 control-label">密码</label>
+								<div class="col-sm-5">
+									<input type="password" class="form-control" id="password" placeholder="请输入您的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-4 col-sm-5">
+									<button id="submitBtn" type="submit" class="btn btn-default btn-block btn-primary">登录</button>
+								</div>
+							</div>
+							</form>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /登陆modal框 -->
   <div class="content-wrap"><!--内容-->
     <div class="content">
       <header class="news_header">
@@ -263,7 +308,7 @@ $.fn.smartFloat = function() {
 				if (window.XMLHttpRequest) { //如果不是ie6 
 					element.css({ //设置css 
 						position: "fixed", //固定定位,即不再跟随滚动 
-						top: 0 //距离页面顶部为0 
+						top: 40 //距离页面顶部为0 
 					}).addClass("shadow"); //加上阴影样式.shadow 
 				} else { //如果是ie6 
 					element.css({ 
@@ -327,10 +372,13 @@ $(function(){
 	        $(".content_view_num").html(jsonData.viewNum);
 	    },
 	    error:function (XMLHttpRequest, textStatus, errorThrown){
-	    	window.location.href=BLOG_IP_URL+"/blog/ie.html";
 	    }
 	});
 })
+
+function showLogin(){
+	$('#loginModal').modal('show'); //显示模态框
+}
 </script>
 </body>
 </html>
