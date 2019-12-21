@@ -19,7 +19,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fracong.blog.func.user.entity.BlogUser;
 import com.fracong.blog.func.user.service.UserService;
 import com.fracong.blog.util.MD5Util;
-import com.fracong.blog.util.RedisCacheType;
 import com.fracong.blog.util.RedisUtil;
 import com.fracong.blog.util.ResponseInfoUtil;
 import com.fracong.blog.util.UserUtils;
@@ -105,6 +104,20 @@ public class UserController {
 				object.put(ResponseInfoUtil.BEAN, blogUser);
 			}
 		}
+		return JSON.toJSONStringWithDateFormat(object, ResponseInfoUtil.DATE_FORMAT, SerializerFeature.WriteMapNullValue);
+	}
+	
+	@GetMapping("/logout")
+	public String Logout(HttpServletRequest request) {
+		JSONObject object = new JSONObject();
+		try {
+			UserUtils.removeUserSession(request);
+			String requestedSessionId = request.getRequestedSessionId();
+			redisUtil.del(requestedSessionId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		object.put(ResponseInfoUtil.MESSSAGE_KEY, ResponseInfoUtil.MESSSAGE_SUCCESS);
 		return JSON.toJSONStringWithDateFormat(object, ResponseInfoUtil.DATE_FORMAT, SerializerFeature.WriteMapNullValue);
 	}
 }

@@ -11,6 +11,11 @@ public class UserUtils {
 		session.setAttribute(RedisCacheType.USER_INFO.toString(), blogUser);
 	}
 	
+	public static void removeUserSession(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute(RedisCacheType.USER_INFO.toString());
+	}
+	
 	public static BlogUser getUserSession(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		BlogUser user_session = (BlogUser)session.getAttribute(RedisCacheType.USER_INFO.toString());
