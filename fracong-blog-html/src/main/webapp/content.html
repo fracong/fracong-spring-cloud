@@ -18,6 +18,7 @@
 <script src="/blog/whole/js/nprogress.js" type="text/javascript"></script>
 <script src="/blog/whole/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/blog/whole/include/const.js" type="text/javascript"></script>
+<script src="/blog/whole/include/common.js" type="text/javascript"></script>
 <script src="/blog/whole/include/top.js" type="text/javascript"></script>
 <!-- js & css end -->
 
@@ -431,8 +432,12 @@
 		})
 
 		$(function() {
+			var id = getQueryVariable("id");
+			if(id == null || id ==""){
+				id = 1;
+			}
 			$.ajax({
-				url: BLOG_API_URL+"/content/getContent/1.html",
+				url: BLOG_API_URL+"/content/getContent/"+id+".html",
 				type : "GET",
 				contentType : "application/json;charset=UTF-8",
 				//async:false,

@@ -4,10 +4,10 @@
 			var html = '';
 			html += '<div class="top-container">'
 							+ '<div class="top-logo"><img src="./whole/images/top_logo.png"/></div>'
-							+'<button class="btn btn-default btn-search login-btn" onclick="showLogin(0)">登陆</button>'
-							+ '<button class="btn btn-default btn-search logout-btn hidden" onclick="showLogout(0)">退出</button>'
+							+'<button class="btn btn-default btn-search login-btn" onclick="showLogin()">登陆</button>'
+							+ '<button class="btn btn-default btn-search logout-btn hidden" onclick="showLogout()">退出</button>'
 							+ '<div class="user_name_class hidden"  >'
-								+ '<strong style="color: royalblue;">Welcome, <span></span></strong>'
+								+ '<strong style="color: royalblue;">用户：<span></span></strong>'
 							+ '</div>' 
 							+ '</div>';
 			$(".blog-top").html(html);
@@ -55,7 +55,7 @@
 											+ '<br/>'
 											+ '<div class="form-group" style="height: 15px;">'
 												+ '<div class="col-sm-offset-4 col-sm-5">'
-													+ '<button id="submitBtn" type="button" class="btn btn-default btn-block btn-primary" onclick="blogUserLogout()">退出</button>'
+													+ '<button id="submitBtn" type="button" class="btn btn-default btn-block btn-primary" onclick="blogUserLogout(0)">退出</button>'
 												+ '</div>'
 											+ '</div>' 
 									+ '</div>'
@@ -79,8 +79,8 @@
 					console.log(typeof data);
 					if("success" == data.message) {
 						var user = data.bean;
-						setUserIfLogin(0,user);
-						setUserIfLogin(1,user);
+						setUserIfLogin(user);
+						setUserIfLogin(user);
 					}
 				}
 			});
@@ -102,7 +102,7 @@ function showLogout(){
 	$('#logoutModal').modal('show');
 }
 
-function blogUserLogin(type) {
+function blogUserLogin() {
 	var loginName = $(".blog-user-login #loginName").val();
 	var userPassword = $(".blog-user-login #userPassword").val();
 	var param = {loginName:loginName,userPassword:userPassword};
@@ -123,30 +123,28 @@ function blogUserLogin(type) {
 				$(".blog-user-login #userPassword").val('');
 				$('#loginModal').modal('hide');
 				var user = data.bean;
-				setUserIfLogin(type,user);
+				setUserIfLogin(user);
 			}
 		}
 	});
 }
 
-function setUserIfLogin(type,user){
-	if(type == 0){
+function setUserIfLogin(user){
 		$(".login-btn").hide();
 		$(".logout-btn").show();
 		$(".logout-btn").removeClass("hidden");
 		$(".user_name_class").show();
 		$(".user_name_class").removeClass("hidden");
 		$(".top-container .user_name_class span").html(user.userName);
-	}else{
+		
 		$(".login-left-xs .login-btn").hide();
 		$(".login-left-xs .user_name_class_xs").show();
 		$(".login-left-xs .user_name_class_xs").removeClass("hidden");
 		$(".login-left-xs .user_name_class_xs span").html(user.userName);
-	}
 }
 
 
-function blogUserLogout(type) {
+function blogUserLogout() {
 	$.ajax({
 		url: BLOG_API_URL+"/user/logout",
 		type : "GET",
@@ -160,22 +158,8 @@ function blogUserLogout(type) {
 			console.log(data.message);
 			if("success" == data.message){
 				$('#logoutModal').modal('hide');
-				setUserIfLogout(type);
+				location.reload();
 			}
 		}
 	});
-}
-
-function setUserIfLogout(type){
-	if(type == 0){
-		$(".login-btn").show();
-		$(".user_name_class").hide();
-		$(".user_name_class").addClass("hidden");
-		$(".top-container .user_name_class span").html("");
-	}else{
-		$(".login-left-xs .login-btn").show();
-		$(".login-left-xs .user_name_class_xs").hide();
-		$(".login-left-xs .user_name_class_xs").addClass("hidden");
-		$(".login-left-xs .user_name_class_xs span").html("");
-	}
 }
