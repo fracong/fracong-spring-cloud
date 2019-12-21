@@ -42,8 +42,7 @@
 		},
 		checkIfLogin : function(){
 			$.ajax({
-				//url: BLOG_API_URL+"/user/login",
-				url : "http://localhost:8099/user/checkLogin",
+				url: BLOG_API_URL+"/user/checkLogin",
 				type : "GET",
 				contentType : "application/json;charset=UTF-8",
 				//async:false,
@@ -78,8 +77,7 @@ function blogUserLogin(type) {
 	var userPassword = $(".blog-user-login #userPassword").val();
 	var param = {loginName:loginName,userPassword:userPassword};
 	$.ajax({
-		//url: BLOG_API_URL+"/user/login",
-		url : "http://localhost:8099/user/login",
+		url: BLOG_API_URL+"/user/login",
 		type : "POST",
 		contentType : "application/json;charset=UTF-8",
 		//async:false,
