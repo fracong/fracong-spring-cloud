@@ -15,11 +15,13 @@ public class ContentService {
 
 	public BlogContent getContentById(Long id) {
 		BlogContent blogContent = blogContentDao.selectByPrimaryKey(id);
-		BlogContent newBlogContent = new BlogContent();
-		newBlogContent.setContentId(id);
-		newBlogContent.setViewNum(blogContent.getViewNum()+1);
-		blogContentDao.updateByPrimaryKeySelective(newBlogContent);
-		blogContent.setViewNum(blogContent.getViewNum()+1);
+		if(blogContent != null && blogContent.getViewNum() != null){
+			BlogContent newBlogContent = new BlogContent();
+			newBlogContent.setContentId(id);
+			newBlogContent.setViewNum(blogContent.getViewNum()+1);
+			blogContentDao.updateByPrimaryKeySelective(newBlogContent);
+			blogContent.setViewNum(blogContent.getViewNum()+1);
+		}
 		return blogContent;
 	}
 

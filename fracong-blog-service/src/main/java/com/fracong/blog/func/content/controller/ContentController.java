@@ -25,7 +25,7 @@ public class ContentController {
 	@Autowired
 	private ContentService contentService;
 	
-	@GetMapping("/getContent/{id}")
+	@GetMapping("/getContent/{id}.html")
 	public String getContent(@PathVariable(name="id") Long id){
 		BlogContent content = contentService.getContentById(id);
 		String returnStr = JSON.toJSONStringWithDateFormat(content, "yyyy-MM-dd HH:mm:ss", SerializerFeature.WriteMapNullValue);

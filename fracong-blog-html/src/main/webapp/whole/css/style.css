@@ -1186,3 +1186,21 @@ textarea::-webkit-scrollbar-thumb {
 	color: #62594b;
 	font-size: 9px;
 }
+
+.login-left-xs{
+	position: relative;
+    float: left;
+    margin-top: 4px;
+    margin-right: 0px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.login-left-xs.login-show-name{
+	margin-top: 2px;
+}

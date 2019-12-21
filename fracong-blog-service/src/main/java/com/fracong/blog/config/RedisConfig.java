@@ -12,28 +12,28 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 public class RedisConfig{
-	@Value("${blog.cms.redis.host}")
+	@Value("${blog.service.redis.host}")
     private String host;
  
-    @Value("${blog.cms.redis.port}")
+    @Value("${blog.service.redis.port}")
     private int port;
  
-    @Value("${blog.cms.redis.timeout}")
+    @Value("${blog.service.redis.timeout}")
     private int timeout;
  
-    @Value("${blog.cms.redis.password}")
+    @Value("${blog.service.redis.password}")
     private String password;
     
-    @Value("${blog.cms.redis.pool.max-active}")
+    @Value("${blog.service.redis.pool.max-active}")
     private int maxActive;
 
-    @Value("${blog.cms.redis.pool.max-idle}")
+    @Value("${blog.service.redis.pool.max-idle}")
     private int maxIdle;
 
-    @Value("${blog.cms.redis.pool.min-idle}")
+    @Value("${blog.service.redis.pool.min-idle}")
     private int minIdle;
 
-    @Value("${blog.cms.redis.pool.max-wait}")
+    @Value("${blog.service.redis.pool.max-wait}")
     private long maxWaitMillis;
  
     @Bean
